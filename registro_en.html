@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Registration - Dr. Wandy Mejía</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>document.documentElement.classList.add('js-enabled');</script>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="body-con-fondo">
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Modern Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="assets/images/logo-wandy-mejia.png" alt="Logo Dr. Wandy Mejía" class="logo-img">
+                <div class="logo-text">
+                    <h1>Dr. Wandy Mejía</h1>
+                    <p>CLINICAL NUTRITIONIST</p>
+                </div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index_en.html">HOME</a></li>
+                <li><a href="index_en.html#sobre-mi">ABOUT ME</a></li>
+                <li><a href="servicios_en.html">SERVICES</a></li>
+                <li><a href="index_en.html#testimonios">TESTIMONIALS</a></li>
+                <li><a href="contacto_en.html">CONTACT</a></li>
+            </ul>
+            <a href="registro_en.html" class="btn-cita">BOOK APPOINTMENT</a>
+            
+            <div class="lang-selector">
+                <i class="fas fa-globe"></i>
+                <a href="registro.html" class="lang-btn">ES</a>
+                <span class="lang-separator">|</span>
+                <a href="registro_en.html" class="lang-btn active">EN</a>
+            </div>
+            
+            <!-- Hamburger menu button -->
+            <button class="menu-btn" id="menuBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile menu -->
+    <ul class="nav-links-mobile" id="mobileMenu">
+        <li class="menu-mobile-header">
+            <div class="menu-mobile-title">
+                <h3>Dr. Wandy Mejía</h3>
+                <p>CLINICAL NUTRITIONIST</p>
+            </div>
+            <img src="assets/images/logo-wandy-mejia.png" alt="Logo Dr. Wandy Mejía" class="menu-mobile-logo">
+        </li>
+        <hr class="menu-mobile-divider">
+        <li><a href="index_en.html">HOME</a></li>
+        <li><a href="index_en.html#sobre-mi">ABOUT ME</a></li>
+        <li><a href="servicios_en.html">SERVICES</a></li>
+        <li><a href="index_en.html#testimonios">TESTIMONIOS</a></li>
+        <li><a href="contacto_en.html">CONTACT</a></li>
+        <li><a href="registro_en.html" class="btn-cita-mobile">BOOK APPOINTMENT</a></li>
+        <li class="lang-selector-mobile">
+            <a href="registro.html">ES</a>
+            <a href="registro_en.html" class="active">EN</a>
+        </li>
+    </ul>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" style="background: url('https://images.unsplash.com/photo-1490645935967-10de6ba17061?q=80&w=2000') center/cover no-repeat; position: relative;">
+            <div class="hero-pink-blur"></div>
+            <div class="hero-overlay-pink"></div>
+            <div class="container text-center">
+                <div class="hero-content">
+                    <h5>Are you ready to schedule your appointment?</h5>
+                    <h1>REGISTER <span>NOW</span></h1>
+                    <p>"Your health is in the best hands. Schedule your consultation with Dr. Wandy Mejía."</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="container">
+            <div style="max-width: 600px; margin: 60px auto;">
+                <div class="form-card reveal-on-scroll">
+                    <h2 style="font-family: 'Playfair Display'; margin-bottom: 16px;">Request an Appointment</h2>
+                    <form id="citaForm">
+                        <div class="form-grid-2">
+                            <div class="form-group">
+                                <label>Full name *</label>
+                                <input type="text" id="nombre" required placeholder="e.g. John Doe">
+                            </div>
+                            <div class="form-group">
+                                <label>Email address *</label>
+                                <input type="email" id="email" required placeholder="you@example.com">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone / WhatsApp *</label>
+                            <input type="tel" id="telefono" required>
+                        </div>
+                        <div class="form-grid-2">
+                            <div class="form-group">
+                                <label>Patient's age</label>
+                                <input type="number" id="edad" placeholder="e.g. 35" min="0" max="120">
+                            </div>
+                            <div class="form-group">
+                                <label>Suggested date</label>
+                                <input type="date" id="fecha">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Preferred time slot</label>
+                            <select id="horario">
+                                <option value="Morning (9:00 AM - 12:00 PM)">Morning (9:00 AM - 12:00 PM)</option>
+                                <option value="Afternoon (2:00 PM - 5:00 PM)">Afternoon (2:00 PM - 5:00 PM)</option>
+                                <option value="Evening (5:00 PM - 8:00 PM)">Evening (5:00 PM - 8:00 PM)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label style="background: var(--primary); color: white; padding: 4px 10px; border-radius: 8px; display: inline-block; margin-bottom: 8px;">Preferred clinic location</label>
+                            <select id="consultorio" style="border-width: 2px; border-color: var(--primary-light);">
+                                <option value="SINAD SALUD (Tuesdays/Thursdays)">SINAD SALUD - Tuesdays and Thursdays</option>
+                                <option value="Medkids Center (Wednesdays)">Medkids Center - Wednesdays</option>
+                                <option value="INSIGHT (Fridays)">INSIGHT - Fridays</option>
+                                <option value="Virtual Consultations (Online)">Virtual Consultations (Online)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Reason for consultation *</label>
+                            <textarea id="motivo" rows="4" required placeholder="What would you like to address in your consultation?"></textarea>
+                        </div>
+                        <label class="consent-check">
+                            <input type="checkbox" id="acceptPolicies" required>
+                            <span>I accept the <a href="terms_en.html" target="_blank" rel="noopener">Terms and Conditions</a> and <a href="privacy_en.html" target="_blank" rel="noopener">Privacy Policy</a>.</span>
+                        </label>
+                        <button type="submit" class="btn-primary" style="width: 100%; font-size: 1.1rem; padding: 18px; margin-top: 10px; box-shadow: 0 10px 20px rgba(212,120,140,0.3);">SCHEDULE APPOINTMENT</button>
+                    </form>
+                    <p style="font-size: 0.85rem; padding: 15px; margin-top: 20px; text-align: center; color: var(--text-muted); background: #fdf5f7; border-radius: 12px;">
+                        <i class="fas fa-shield-alt" style="color: var(--primary); margin-right: 5px;"></i> Physical clinic appointments are booked via WhatsApp. Virtual consultations will proceed to online checkout.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-logo">
+                        <img src="assets/images/logo-wandy-mejia.png" alt="Logo" class="footer-logo-img">
+                        <div class="footer-logo-text">
+                            <h3>Dr. Wandy Mejía</h3>
+                            <p>Clinical Nutritionist</p>
+                        </div>
+                    </div>
+                    <div class="footer-about">
+                        <p>Specialist in clinical nutrition, obesity, pediatric nutrition, autism, and ADHD.</p>
+                    </div>
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index_en.html">Home</a></li>
+                        <li><a href="index_en.html#sobre-mi">About Me</a></li>
+                        <li><a href="servicios_en.html">Services</a></li>
+                        <li><a href="index_en.html#testimonios">Testimonials</a></li>
+                        <li><a href="contacto_en.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Clinics</h4>
+                    <ul class="footer-links">
+                        <li><a href="contacto_en.html#sinad-salud">SINAD SALUD</a></li>
+                        <li><a href="contacto_en.html#medkids-center">Medkids Center</a></li>
+                        <li><a href="contacto_en.html#insight">INSIGHT</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Contact Info</h4>
+                    <div class="footer-contact">
+                        <p><i class="fas fa-phone"></i> 809-459-2222</p>
+                        <p><i class="fas fa-envelope"></i> <a href="mailto:drawandymejiard@gmail.com">drawandymejiard@gmail.com</a></p>
+                        <p><i class="fab fa-instagram"></i> @drawandymejiard</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Dr. Wandy Mejía. All rights reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="terms_en.html">Terms and Conditions</a>
+                    <a href="privacy_en.html">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var form = document.getElementById('citaForm');
+            if(form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    var nombre = document.getElementById('nombre').value;
+                    var email = document.getElementById('email').value;
+                    var telefono = document.getElementById('telefono').value;
+                    var edad = document.getElementById('edad').value || "Not specified";
+                    var fecha = document.getElementById('fecha').value || "Not specified";
+                    var horario = document.getElementById('horario').value || "Not specified";
+                    var consultorio = document.getElementById('consultorio').value;
+                    var motivo = document.getElementById('motivo').value;
+
+                    // If online consultation, redirect to checkout page
+                    if (consultorio.includes("Virtual")) {
+                        const datosCita = {
+                            nombre: nombre,
+                            email: email,
+                            telefono: telefono,
+                            edad: edad,
+                            fecha: fecha,
+                            horario: horario,
+                            consultorio: consultorio,
+                            motivo: motivo
+                        };
+                        sessionStorage.setItem('temp_cita_data', JSON.stringify(datosCita));
+                        window.location.href = "pago_en.html?item=consulta";
+                        return;
+                    }
+
+                    // Determine clinic phone number
+                    var phone = "18094592222"; // General number
+                    if (consultorio.includes("SINAD")) {
+                        phone = "18095428898";
+                    } else if (consultorio.includes("Medkids")) {
+                        phone = "18095691072";
+                    } else if (consultorio.includes("INSIGHT")) {
+                        phone = "18492621997";
+                    }
+
+                    // Build WhatsApp message
+                    var mensaje = "Hello, I am interested in scheduling an appointment with Dr. Wandy Mejía. I'm writing from your website.%0A%0A" +
+                                  "*My Details:*%0A" +
+                                  "- Name: " + encodeURIComponent(nombre) + "%0A" +
+                                  "- Phone: " + encodeURIComponent(telefono) + "%0A" +
+                                  "- Email: " + encodeURIComponent(email) + "%0A" +
+                                  "- Age: " + encodeURIComponent(edad) + "%0A" +
+                                  "- Suggested Date: " + encodeURIComponent(fecha) + "%0A" +
+                                  "- Preferred Time: " + encodeURIComponent(horario) + "%0A" +
+                                  "- Selected Clinic: " + encodeURIComponent(consultorio) + "%0A" +
+                                  "- Reason: " + encodeURIComponent(motivo);
+
+                    // Open WhatsApp in a new tab
+                    window.open("https://wa.me/" + phone + "?text=" + mensaje, "_blank");
+                });
+            }
+        });
+    </script>
+    <!-- GSAP and ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="js/scripts.js"></script>
+    <script src="js/animaciones.js"></script>
+    <script src="js/chatbot.js"></script>
+</body>
+</html>
