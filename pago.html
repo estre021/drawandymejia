@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasarela de Pago Seguro - Dra. Wandy Mejía</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="body-con-fondo">
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Navbar Moderno -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="assets/images/logo-wandy-mejia.png" alt="Logo Dra. Wandy Mejía" class="logo-img">
+                <div class="logo-text">
+                    <h1>Dra. Wandy Mejía</h1>
+                    <p>NUTRIÓLOGA CLÍNICA</p>
+                </div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">INICIO</a></li>
+                <li><a href="index.html#sobre-mi">SOBRE MÍ</a></li>
+                <li><a href="servicios.html">SERVICIOS</a></li>
+                <li><a href="index.html#testimonios">TESTIMONIOS</a></li>
+                <li><a href="contacto.html">CONTACTO</a></li>
+            </ul>
+            <a href="registro.html" class="btn-cita">HACER CITA</a>
+            
+            <div class="lang-selector">
+                <i class="fas fa-globe"></i>
+                <a href="#" id="langEsBtn" class="lang-btn active">ES</a>
+                <span class="lang-separator">|</span>
+                <a href="#" id="langEnBtn" class="lang-btn">EN</a>
+            </div>
+            
+            <!-- Botón menú hamburguesa -->
+            <button class="menu-btn" id="menuBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Menú mobile -->
+    <ul class="nav-links-mobile" id="mobileMenu">
+        <li class="menu-mobile-header">
+            <div class="menu-mobile-title">
+                <h3>Dra. Wandy Mejía</h3>
+                <p>NUTRIÓLOGA CLÍNICA</p>
+            </div>
+            <img src="assets/images/logo-wandy-mejia.png" alt="Logo Dra. Wandy Mejía" class="menu-mobile-logo">
+        </li>
+        <hr class="menu-mobile-divider">
+        <li><a href="index.html">INICIO</a></li>
+        <li><a href="index.html#sobre-mi">SOBRE MÍ</a></li>
+        <li><a href="servicios.html">SERVICIOS</a></li>
+        <li><a href="index.html#testimonios">TESTIMONIOS</a></li>
+        <li><a href="contacto.html">CONTACTO</a></li>
+        <li><a href="registro.html" class="btn-cita-mobile">HACER CITA</a></li>
+    </ul>
+
+    <main class="checkout-section">
+        <div class="container">
+            <div class="checkout-grid">
+                
+                <!-- Columna Izquierda: Métodos de Pago y Formularios -->
+                <div class="checkout-card legacy-payment-simulation" id="mainPaymentCard">
+                    <h2 class="checkout-title" id="checkoutTitleText">Método de Pago Seguro</h2>
+                    
+                    <div class="payment-methods">
+                        <button class="payment-tab-btn active" onclick="switchTab('tarjeta')">
+                            <i class="fas fa-credit-card"></i> Tarjeta
+                        </button>
+                        <button class="payment-tab-btn" onclick="switchTab('paypal')">
+                            <i class="fab fa-paypal"></i> PayPal
+                        </button>
+                        <button class="payment-tab-btn" onclick="switchTab('transferencia')">
+                            <i class="fas fa-bank"></i> Transferencia
+                        </button>
+                    </div>
+
+                    <!-- 1. Formulario de Tarjeta -->
+                    <div id="content-tarjeta" class="payment-content active">
+                        <!-- Preview Dinámico de Tarjeta -->
+                        <div class="card-preview">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="card-preview-chip"></div>
+                                <i class="fab fa-cc-visa" style="font-size: 2.2rem;" id="cardBrandIcon"></i>
+                            </div>
+                            <div class="card-preview-number" id="previewNumber">•••• •••• •••• ••••</div>
+                            <div class="card-preview-info">
+                                <div>
+                                    <span style="font-size: 0.55rem; opacity: 0.6; display:block;">Titular</span>
+                                    <span id="previewName">Nombre del Titular</span>
+                                </div>
+                                <div>
+                                    <span style="font-size: 0.55rem; opacity: 0.6; display:block;">Vence</span>
+                                    <span id="previewExpiry">MM/AA</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Inputs del Formulario -->
+                        <form id="cardForm" onsubmit="processPayment(event, 'Tarjeta de Crédito')">
+                            <div class="form-group">
+                                <label>Nombre del Titular *</label>
+                                <input type="text" id="cardName" required placeholder="Ej. Juan Pérez" oninput="updateCardPreview()">
+                            </div>
+                            <div class="form-group">
+                                <label>Número de Tarjeta *</label>
+                                <input type="text" id="cardNumber" required placeholder="4000 1234 5678 9010" maxlength="19" oninput="formatCardNumber(this); updateCardPreview();">
+                            </div>
+                            <div class="card-inputs-grid">
+                                <div class="form-group">
+                                    <label>Fecha Vence *</label>
+                                    <input type="text" id="cardExpiry" required placeholder="MM/AA" maxlength="5" oninput="formatExpiry(this); updateCardPreview();">
+                                </div>
+                                <div class="form-group">
+                                    <label>CVV *</label>
+                                    <input type="password" id="cardCvv" required placeholder="123" maxlength="4">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn-primary" style="width: 100%; padding: 16px; font-size: 1.05rem; margin-top: 20px;">Pagar de Forma Segura</button>
+                        </form>
+                    </div>
+
+                    <!-- 2. Formulario de PayPal -->
+                    <div id="content-paypal" class="payment-content">
+                        <p style="color: var(--text-muted); margin-bottom: 25px; line-height: 1.6; text-align: center;">Haz clic en el botón de abajo para iniciar tu pago seguro con PayPal. Serás redirigido a una simulación de pago seguro.</p>
+                        <button class="paypal-mock-btn" onclick="processPayment(event, 'PayPal')">
+                            <i class="fab fa-paypal"></i> Pagar con PayPal
+                        </button>
+                    </div>
+
+                    <!-- 3. Formulario de Transferencia Bancaria -->
+                    <div id="content-transferencia" class="payment-content">
+                        <div class="bank-instructions">
+                            <h5>Instrucciones de Transferencia</h5>
+                            <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 15px; line-height: 1.5;">Puedes realizar una transferencia directa a cualquiera de nuestras cuentas bancarias oficiales en República Dominicana:</p>
+                            
+                            <div class="bank-account-box">
+                                <strong>Banco Popular Dominicano</strong><br>
+                                Cta. Corriente: 789456123<br>
+                                Beneficiario: Dra. Wandy Mejía
+                            </div>
+                            <div class="bank-account-box">
+                                <strong>Banco BHD León</strong><br>
+                                Cta. Ahorros: 987654321<br>
+                                Beneficiario: Dra. Wandy Mejía
+                            </div>
+                            
+                            <p style="font-size: 0.82rem; color: var(--primary-dark); font-weight: 600; margin-top: 15px;"><i class="fas fa-info-circle"></i> Importante: Después de transferir, haz clic en el botón de abajo para registrar los datos y enviar el comprobante a la doctora.</p>
+                        </div>
+                        <button class="btn-primary" style="width: 100%; padding: 15px;" onclick="processPayment(event, 'Transferencia Bancaria')">Notificar Transferencia Realizada</button>
+                    </div>
+
+                </div>
+
+                <div class="checkout-card real-payment-card" id="realPaymentCard">
+                    <h2 class="checkout-title">Pago seguro</h2>
+                    <p class="payment-security-note"><i class="fas fa-shield-alt"></i> El pago se procesa en PayPal. Este sitio no recibe ni almacena los datos de tu tarjeta.</p>
+                    <div id="paypal-button-container"></div>
+                    <p class="payment-provider-status" id="paymentProviderStatus">Cargando pasarela segura...</p>
+                </div>
+
+                <!-- Pantalla de Procesamiento / Éxito -->
+                <div class="checkout-card" id="loadingPaymentCard" style="display: none; min-height: 400px; align-items: center; justify-content: center;">
+                    <div class="payment-loading active">
+                        <div class="spinner"></div>
+                        <h3 id="loadingText">Procesando tu pago seguro...</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 5px;">Por favor, no recargues la página.</p>
+                    </div>
+                </div>
+
+                <div class="checkout-card" id="successPaymentCard" style="display: none;">
+                    <div class="payment-success active">
+                        <div class="success-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <h2 class="success-title" id="successTitleText">¡Registro y Pago Confirmado!</h2>
+                        <p class="success-desc" id="successDescText" style="margin-bottom: 15px;">Tu solicitud de servicio virtual ha sido procesada de forma segura.</p>
+                        
+                        <!-- Tarjeta de confirmación visual -->
+                        <div class="confirmation-details-box" id="confirmationDetailsBox" style="background: #fdf5f7; border: 1px solid var(--primary-light); padding: 20px; border-radius: 16px; margin: 15px 0 25px 0; text-align: left; font-size: 0.9rem; line-height: 1.6; color: var(--text-dark); font-family: 'DM Sans', sans-serif;">
+                            <!-- Cargado dinámicamente con JS -->
+                        </div>
+
+                        <p class="success-desc" style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;" id="successNotifyText">Para finalizar y coordinar el enlace de la consulta virtual, envía este registro a la doctora por una de las siguientes vías:</p>
+
+                        <div class="success-actions" style="display: flex; flex-direction: column; gap: 12px;">
+                            <button class="btn-primary" id="btnWhatsAppAction" style="width: 100%; font-size: 1.05rem; padding: 16px; background: #25d366; border-color: #25d366; box-shadow: 0 10px 25px rgba(37,211,102,0.25);">
+                                <i class="fab fa-whatsapp"></i> Enviar por WhatsApp
+                            </button>
+                            <button class="btn-primary" id="btnGmailAction" style="width: 100%; font-size: 1.05rem; padding: 16px; box-shadow: 0 10px 25px rgba(212,120,140,0.3);">
+                                <i class="far fa-envelope"></i> Enviar por Gmail
+                            </button>
+                            <a href="index.html" class="btn-outline" style="width: 100%; padding: 12px; margin-top: 10px;" id="btnReturnText">Volver al Inicio</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Columna Derecha: Resumen de Compra -->
+                <div class="summary-card" id="summaryCard">
+                    <h3 class="summary-title" id="summaryTitleText">Resumen de Compra</h3>
+                    
+                    <div id="summaryItems">
+                        <!-- Se poblará dinámicamente -->
+                    </div>
+                    
+                    <div class="summary-row total">
+                        <span id="summaryTotalText">Total a pagar</span>
+                        <span id="summaryTotalValue">$50.00 USD</span>
+                    </div>
+
+                    <!-- Datos del paciente si viene de registro.html -->
+                    <div id="patientDetailsBox" style="margin-top: 25px; padding-top: 20px; border-top: 1px dashed var(--gray); display: none;">
+                        <h4 style="font-size: 0.95rem; font-family: 'DM Sans', sans-serif; color: var(--primary-dark); margin-bottom: 10px; font-weight: 700;" id="summaryPatientTitle">Datos de la Cita:</h4>
+                        <div style="font-size: 0.85rem; color: #555; line-height: 1.5;" id="patientDetailsContent">
+                            <!-- Se rellena con JS -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-logo">
+                        <img src="assets/images/logo-wandy-mejia.png" alt="Logo" class="footer-logo-img">
+                        <div class="footer-logo-text">
+                            <h3>Dra. Wandy Mejía</h3>
+                            <p>Nutrióloga Clínica</p>
+                        </div>
+                    </div>
+                    <div class="footer-about">
+                        <p>Especialista en nutrición clínica, obesidad, nutrición infantil, autismo y TDAH.</p>
+                    </div>
+                </div>
+                <div>
+                    <h4>Enlaces Rápidos</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="index.html#sobre-mi">Sobre mí</a></li>
+                        <li><a href="servicios.html">Servicios</a></li>
+                        <li><a href="index.html#testimonios">Testimonios</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Consultorios</h4>
+                    <ul class="footer-links">
+                        <li><a href="contacto.html#sinad-salud">SINAD SALUD</a></li>
+                        <li><a href="contacto.html#medkids-center">Medkids Center</a></li>
+                        <li><a href="contacto.html#insight">INSIGHT</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Contacto</h4>
+                    <div class="footer-contact">
+                        <p><i class="fas fa-phone"></i> 809-459-2222</p>
+                        <p><i class="fas fa-envelope"></i> <a href="mailto:drawandymejiard@gmail.com">drawandymejiard@gmail.com</a></p>
+                        <p><i class="fab fa-instagram"></i> @drawandymejiard</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Configurar enlaces del selector de idiomas dinámicamente
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentUrl = new URL(window.location.href);
+            const itemParam = currentUrl.searchParams.get('item') || '';
+            
+            document.getElementById('langEsBtn').addEventListener('click', (e) => {
+                e.preventDefault();
+                window.location.href = `pago.html?item=${itemParam}`;
+            });
+            document.getElementById('langEnBtn').addEventListener('click', (e) => {
+                e.preventDefault();
+                window.location.href = `pago_en.html?item=${itemParam}`;
+            });
+        });
+
+        // Alternar pestañas de pago
+        function switchTab(tabId) {
+            document.querySelectorAll('.payment-tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.payment-content').forEach(content => content.classList.remove('active'));
+            
+            // Activar botón pulsado
+            const targetBtn = Array.from(document.querySelectorAll('.payment-tab-btn')).find(btn => btn.innerText.toLowerCase().includes(tabId === 'tarjeta' ? 'tarjeta' : tabId === 'paypal' ? 'paypal' : 'transferencia'));
+            if (targetBtn) targetBtn.classList.add('active');
+            
+            const targetContent = document.getElementById(`content-${tabId}`);
+            if (targetContent) targetContent.classList.add('active');
+        }
+
+        // Formateadores automáticos de inputs
+        function formatCardNumber(input) {
+            let value = input.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+            let formatted = '';
+            for (let i = 0; i < value.length; i++) {
+                if (i > 0 && i % 4 === 0) formatted += ' ';
+                formatted += value[i];
+            }
+            input.value = formatted;
+        }
+
+        function formatExpiry(input) {
+            let value = input.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+            if (value.length > 2) {
+                input.value = value.substring(0, 2) + '/' + value.substring(2, 4);
+            } else {
+                input.value = value;
+            }
+        }
+
+        function updateCardPreview() {
+            const nameInput = document.getElementById('cardName').value;
+            const numberInput = document.getElementById('cardNumber').value;
+            const expiryInput = document.getElementById('cardExpiry').value;
+            const brandIcon = document.getElementById('cardBrandIcon');
+
+            document.getElementById('previewName').innerText = nameInput ? nameInput : 'Nombre del Titular';
+            document.getElementById('previewNumber').innerText = numberInput ? numberInput : '•••• •••• •••• ••••';
+            document.getElementById('previewExpiry').innerText = expiryInput ? expiryInput : 'MM/AA';
+
+            // Detección simple de marca de tarjeta
+            if (numberInput.startsWith('4')) {
+                brandIcon.className = 'fab fa-cc-visa';
+                brandIcon.style.color = '#37a2e8';
+            } else if (numberInput.startsWith('5')) {
+                brandIcon.className = 'fab fa-cc-mastercard';
+                brandIcon.style.color = '#eb5757';
+            } else if (numberInput.startsWith('3')) {
+                brandIcon.className = 'fab fa-cc-amex';
+                brandIcon.style.color = '#27ae60';
+            } else {
+                brandIcon.className = 'fas fa-credit-card';
+                brandIcon.style.color = 'white';
+            }
+        }
+
+        // Obtener detalles de compra basados en query param
+        let itemTitle = "Consulta Nutricional Virtual";
+        let itemPriceUSD = 50.00;
+        let itemPriceDOP = 3000;
+        let appointmentData = null;
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const itemType = urlParams.get('item');
+
+        if (itemType === 'charla-tea') {
+            itemTitle = "Charla: Nutrición en Autismo (TEA) & TDAH";
+            itemPriceUSD = 25.00;
+            itemPriceDOP = 1500;
+        } else if (itemType === 'charla-microbiota') {
+            itemTitle = "Charla: Microbiota y tu Segundo Cerebro";
+            itemPriceUSD = 20.00;
+            itemPriceDOP = 1200;
+        } else if (itemType === 'charla-habitos') {
+            itemTitle = "Charla: Hábitos Sostenibles sin Dietas";
+            itemPriceUSD = 15.00;
+            itemPriceDOP = 900;
+        } else {
+            // Virtual appointment by default
+            appointmentData = JSON.parse(sessionStorage.getItem('temp_cita_data'));
+            if (appointmentData) {
+                itemTitle = "Consulta Nutricional Virtual";
+                itemPriceUSD = 50.00;
+                itemPriceDOP = 3000;
+                
+                // Mostrar datos
+                document.getElementById('patientDetailsBox').style.display = 'block';
+                document.getElementById('patientDetailsContent').innerHTML = `
+                    <strong>Paciente:</strong> ${appointmentData.nombre}<br>
+                    <strong>Edad:</strong> ${appointmentData.edad} años<br>
+                    <strong>WhatsApp:</strong> ${appointmentData.telefono}<br>
+                    <strong>Fecha sugerida:</strong> ${appointmentData.fecha}<br>
+                    <strong>Horario:</strong> Consultar a la doctora (por confirmar)<br>
+                    <strong>Motivo:</strong> ${appointmentData.motivo}
+                `;
+            }
+        }
+
+        // Cargar datos en el resumen de compra
+        document.getElementById('summaryItems').innerHTML = `
+            <div class="summary-row" style="font-weight: 600; color: var(--text-dark);">
+                <span>${itemTitle}</span>
+                <span>$${itemPriceUSD.toFixed(2)} USD</span>
+            </div>
+            <div class="summary-row" style="font-size: 0.8rem; margin-top: -5px;">
+                <span>Equivalente aproximado en DOP:</span>
+                <span>RD$ ${itemPriceDOP.toLocaleString()}</span>
+            </div>
+        `;
+        document.getElementById('summaryTotalValue').innerText = `$${itemPriceUSD.toFixed(2)} USD`;
+
+        // Simular procesamiento de pago
+        function processPayment(event, method) {
+            event.preventDefault();
+            
+            // Ocultar formulario principal y mostrar barra de carga
+            document.getElementById('mainPaymentCard').style.display = 'none';
+            document.getElementById('loadingPaymentCard').style.display = 'flex';
+            
+            setTimeout(() => {
+                // Ocultar carga y mostrar éxito
+                document.getElementById('loadingPaymentCard').style.display = 'none';
+                document.getElementById('successPaymentCard').style.display = 'block';
+                
+                // Inyectar datos en el panel de confirmación
+                const transDate = new Date().toLocaleString();
+                const detailsBox = document.getElementById('confirmationDetailsBox');
+                
+                if (appointmentData) {
+                    detailsBox.innerHTML = `
+                        <strong>Paciente:</strong> ${appointmentData.nombre}<br>
+                        <strong>Fecha Cita:</strong> ${appointmentData.fecha}<br>
+                        <strong>Horario Cita:</strong> Consultar a la doctora (por confirmar)<br>
+                        <strong>Servicio:</strong> Consulta Nutricional Virtual<br>
+                        <strong>Monto Pagado:</strong> $50.00 USD / RD$ 3,000<br>
+                        <strong>Método de Pago:</strong> ${method}<br>
+                        <strong>Fecha de Pago:</strong> ${transDate}
+                    `;
+                } else {
+                    detailsBox.innerHTML = `
+                        <strong>Charla Adquirida:</strong> ${itemTitle}<br>
+                        <strong>Monto Pagado:</strong> $${itemPriceUSD.toFixed(2)} USD / RD$ ${itemPriceDOP.toLocaleString()}<br>
+                        <strong>Método de Pago:</strong> ${method}<br>
+                        <strong>Fecha de Pago:</strong> ${transDate}
+                    `;
+                }
+
+                // Configurar acción del botón Gmail y WhatsApp
+                setupGmailAndWhatsAppButtons(method, transDate);
+            }, 2000);
+        }
+
+        // Configuración de envío por WhatsApp y Gmail
+        function setupGmailAndWhatsAppButtons(paymentMethod, transactionDate) {
+            const emailDestination = "drawandymejiard@gmail.com";
+            const whatsappNumber = "18094592222"; // Número de la doctora
+            let emailSubject = "";
+            let emailBody = "";
+            let waMessage = "";
+
+            if (appointmentData) {
+                emailSubject = `Cita Virtual Confirmada - ${appointmentData.nombre}`;
+                emailBody = `Hola Dra. Wandy Mejía,
+            
+He completado el registro y el pago de mi Consulta Virtual (Online) a través de su página web.
+
+DETALLES DE LA CITA:
+- Paciente: ${appointmentData.nombre}
+- Correo electrónico: ${appointmentData.email}
+- Teléfono / WhatsApp: ${appointmentData.telefono}
+- Edad del paciente: ${appointmentData.edad}
+- Fecha sugerida: ${appointmentData.fecha}
+- Horario sugerido: Consultar a la doctora (por confirmar)
+- Motivo: ${appointmentData.motivo}
+
+DETALLES DE PAGO:
+- Servicio: Consulta Nutricional Virtual
+- Monto: $50.00 USD / RD$ 3,000
+- Método utilizado: ${paymentMethod}
+- Fecha de pago: ${transactionDate}
+- Estado del pago: Confirmado
+
+Quedo a la espera de sus instrucciones y del enlace para nuestra sesión virtual. ¡Muchas gracias!`;
+
+                waMessage = `*CONFIRMACIÓN DE PAGO Y REGISTRO DE CITA VIRTUAL*%0A%0A` +
+                            `Hola Dra. Wandy Mejía, he registrado y pagado mi cita virtual.%0A%0A` +
+                            `*Detalles de la Cita:*%0A` +
+                            `- *Paciente:* ${encodeURIComponent(appointmentData.nombre)}%0A` +
+                            `- *WhatsApp:* ${encodeURIComponent(appointmentData.telefono)}%0A` +
+                            `- *Fecha Sugerida:* ${encodeURIComponent(appointmentData.fecha)}%0A` +
+                            `- *Horario:* Consultar a la doctora (por confirmar)%0A` +
+                            `- *Motivo:* ${encodeURIComponent(appointmentData.motivo)}%0A%0A` +
+                            `*Detalles de Pago:*%0A` +
+                            `- *Servicio:* Consulta Nutricional Virtual%0A` +
+                            `- *Monto:* $50.00 USD / RD$ 3,000%0A` +
+                            `- *Método:* ${encodeURIComponent(paymentMethod)}%0A` +
+                            `- *Fecha de Pago:* ${encodeURIComponent(transactionDate)}%0A` +
+                            `- *Estado:* Confirmado%0A%0A` +
+                            `Quedo a la espera de la confirmación del horario final y el enlace de la reunión. ¡Gracias!`;
+            } else {
+                emailSubject = `Compra Confirmada - ${itemTitle}`;
+                emailBody = `Hola Dra. Wandy Mejía,
+
+He adquirido acceso para su charla virtual grabada desde su sitio web.
+
+DETALLES DEL SOLICITANTE:
+- Charla adquirida: ${itemTitle}
+- Correo de contacto: (Por favor, introduzca su correo aquí)
+- Nombre completo: (Por favor, introduzca su nombre aquí)
+
+DETALLES DE PAGO:
+- Monto: $${itemPriceUSD.toFixed(2)} USD / RD$ ${itemPriceDOP.toLocaleString()}
+- Método utilizado: ${paymentMethod}
+- Fecha de pago: ${transactionDate}
+- Estado del pago: Confirmado
+
+Quedo a la espera del enlace y las credenciales para poder visualizar la charla virtual. ¡Muchas gracias!`;
+
+                waMessage = `*CONFIRMACIÓN DE COMPRA - CHARLA VIRTUAL*%0A%0A` +
+                            `Hola Dra. Wandy Mejía, he adquirido acceso para una de sus charlas virtuales.%0A%0A` +
+                            `- *Charla:* ${encodeURIComponent(itemTitle)}%0A` +
+                            `- *Monto:* $${itemPriceUSD.toFixed(2)} USD / RD$ ${itemPriceDOP}%0A` +
+                            `- *Método:* ${encodeURIComponent(paymentMethod)}%0A` +
+                            `- *Fecha de Pago:* ${encodeURIComponent(transactionDate)}%0A` +
+                            `- *Estado:* Confirmado%0A%0A` +
+                            `Quedo a la espera del enlace y acceso a la conferencia. ¡Gracias!`;
+            }
+
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            const gmailBtn = document.getElementById('btnGmailAction');
+            const whatsappBtn = document.getElementById('btnWhatsAppAction');
+
+            // Clonar botones para limpiar event listeners antiguos si los hay
+            const newGmailBtn = gmailBtn.cloneNode(true);
+            gmailBtn.parentNode.replaceChild(newGmailBtn, gmailBtn);
+            newGmailBtn.addEventListener('click', () => {
+                if (isMobile) {
+                    window.location.href = `mailto:${emailDestination}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+                } else {
+                    window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${emailDestination}&su=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`, "_blank");
+                }
+                sessionStorage.removeItem('temp_cita_data');
+            });
+
+            if (whatsappBtn) {
+                const newWaBtn = whatsappBtn.cloneNode(true);
+                whatsappBtn.parentNode.replaceChild(newWaBtn, whatsappBtn);
+                newWaBtn.addEventListener('click', () => {
+                    window.open(`https://wa.me/${whatsappNumber}?text=${waMessage}`, "_blank");
+                    sessionStorage.removeItem('temp_cita_data');
+                });
+            }
+        }
+    </script>
+    <script src="js/checkout-paypal.js"></script>
+    <script src="js/scripts.js"></script>
+    <script src="js/chatbot.js"></script>
+</body>
+</html>

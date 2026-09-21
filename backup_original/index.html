@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Dra. Wandy Mejía - Nutrióloga Clínica</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Navbar Moderno -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="assets/images/logo-wandy-mejia.png" alt="Logo Dra. Wandy Mejía" class="logo-img">
+                <div class="logo-text">
+                    <h1>Dra. Wandy Mejía</h1>
+                    <p>NUTRIÓLOGA CLÍNICA</p>
+                </div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#inicio">INICIO</a></li>
+                <li><a href="#sobre-mi">SOBRE MÍ</a></li>
+                <li><a href="servicios.html">SERVICIOS</a></li>
+                <li><a href="#testimonios">TESTIMONIOS</a></li>
+                <li><a href="contacto.html">CONTACTO</a></li>
+            </ul>
+            <a href="registro.html" class="btn-cita">HACER CITA</a>
+            <div class="lang-selector">
+                <i class="fas fa-globe"></i>
+                <a href="index.html" class="lang-btn active">ES</a>
+                <span class="lang-separator">|</span>
+                <a href="index_en.html" class="lang-btn">EN</a>
+            </div>
+            
+            <!-- Botón menú hamburguesa -->
+            <button class="menu-btn" id="menuBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Menú mobile -->
+    <ul class="nav-links-mobile" id="mobileMenu">
+        <li class="menu-mobile-header">
+            <div class="menu-mobile-title">
+                <h3>Dra. Wandy Mejía</h3>
+                <p>NUTRIÓLOGA CLÍNICA</p>
+            </div>
+            <img src="assets/images/logo-wandy-mejia.png" alt="Logo Dra. Wandy Mejía" class="menu-mobile-logo">
+        </li>
+        <hr class="menu-mobile-divider">
+        <li><a href="#inicio">INICIO</a></li>
+        <li><a href="#sobre-mi">SOBRE MÍ</a></li>
+        <li><a href="servicios.html">SERVICIOS</a></li>
+        <li><a href="#testimonios">TESTIMONIOS</a></li>
+        <li><a href="contacto.html">CONTACTO</a></li>
+        <li><a href="contacto.html" class="btn-cita-mobile">HACER CITA</a></li>
+        <li class="lang-selector-mobile">
+            <a href="index.html" class="active">ES</a>
+            <a href="index_en.html">EN</a>
+        </li>
+    </ul>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero reveal-on-scroll">
+        <div class="video-container">
+            <video autoplay loop muted playsinline class="video-bg" id="heroVideo">
+                <source src="assets/videos/hero-bg.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="hero-overlay-blur" id="heroBlur"></div>
+        <div class="container text-center">
+            <div class="hero-content">
+                <h5>DRA. WANDY MEJÍA · NUTRICIÓN CLÍNICA</h5>
+                <h1>TU SALUD EMPIEZA CON UNA BUENA <span>NUTRICIÓN</span></h1>
+                <p>La Dra. Wandy Mejía ofrece asesoría nutricional clínica y personalizada para optimizar tu metabolismo, salud digestiva y calidad de vida con resultados sostenibles.</p>
+                <a href="contacto.html" class="btn-primary">AGENDAR CITA CON LA DRA.</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre Mí -->
+    <section id="sobre-mi" class="about reveal-on-scroll">
+        <div class="profile-section">
+            <div class="photo-side reveal-on-scroll delay-1">
+                <img src="assets/images/dra-wandy-profile.jpeg" alt="Dra. Wandy Mejía" class="photo-image">
+                <div class="photo-overlay reveal-on-scroll delay-2">
+                    <p class="photo-tag">Nutrición clínica con enfoque humano y resultados reales</p>
+                </div>
+                <div class="accent-bar"></div>
+            </div>
+            <div class="info-side">
+                <div class="info-top reveal-on-scroll delay-3">
+                    <div class="name-block reveal-on-scroll delay-4">
+                        <p class="doctor-name">Dra. Wandy Mejía</p>
+                        <p class="doctor-title">Nutrióloga Clínica</p>
+                    </div>
+                    <p class="eyebrow reveal-on-scroll delay-5">Transformando salud y energía con planes clínicos personalizados para cada paciente.</p>
+                </div>
+                <p class="bio-text reveal-on-scroll delay-6">Desde su práctica en República Dominicana, la Dra. Wandy Mejía combina experiencia clínica, evidencia científica y una mirada humana para guiar cambios sostenibles en la alimentación y el bienestar.</p>
+                <div class="quote-card reveal-on-scroll delay-7">“Acompañamiento profesional, cercano y libre de modas pasajeras para mejores resultados a largo plazo.”</div>
+                <div class="divider"></div>
+                <div class="specialties reveal-on-scroll delay-8">
+                    <div class="specialty-item"><div class="dot"></div><span>Control de peso con enfoque metabólico y hormonal para mujeres.</span></div>
+                    <div class="specialty-item"><div class="dot"></div><span>Nutrición pediátrica para autismo (TEA), TDAH y selectividad alimentaria.</span></div>
+                    <div class="specialty-item"><div class="dot"></div><span>Planificación culinaria profesional y acompañamiento clínico continuo.</span></div>
+                </div>
+                <div class="credentials reveal-on-scroll delay-9">
+                    <span class="badge">Nutrición integral</span>
+                </div>
+                <a href="contacto.html" class="cta-btn reveal-on-scroll delay-10">Agendar consulta</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificaciones -->
+    <section class="certifications reveal-on-scroll">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="certifications-title">CERTIFICACIONES</h2>
+            </div>
+            <div class="swiper certSwiper swiper-container-custom">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="cert-card">
+                            <img src="assets/images/uasd-logo.jpg" alt="UASD">
+                            <p>Egresada de la prestigiosa Universidad Autónoma de Santo Domingo (UASD).</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="cert-card">
+                            <img src="https://images.unsplash.com/photo-1581091870622-3e9b7110ac76?auto=format&fit=crop&w=800&q=80" alt="Master en Nutrición Clínica">
+                            <p>Especialización en Nutrición Clínica, Microbiota Intestinal y Metabolismo Humano.</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="cert-card">
+                            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80" alt="Certificaciones profesionales">
+                            <p>Certificada en abordaje nutricional pediátrico para condiciones neurodesarrollales (Autismo/TEA y TDAH).</p>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="cert-card">
+                            <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=800&q=80" alt="SODONUCLIM">
+                            <p>Miembro activo de la Sociedad Dominicana de Nutrición Clínica y Metabolismo (SODONUCLIM).</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Servicios en Página Principal - Solo 3 servicios -->
+    <section id="servicios" class="services reveal-on-scroll">
+        <div class="video-container">
+            <video autoplay loop muted playsinline class="video-bg" id="servicesVideo">
+                <source src="assets/videos/services-bg.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="services-overlay-blur"></div>
+        <div class="container">
+            <div class="services-header">
+                <p class="small-title">SERVICIOS CLÍNICOS</p>
+                <h2 class="section-title">Servicios especializados de la Dra. Wandy Mejía</h2>
+                <p class="section-description">Consulta médica enfocada en resultados reales: salud digestiva, control de peso y acompañamiento en autismo y TDAH.</p>
+            </div>
+            <div class="services-grid">
+                <!-- Servicio 1: Consulta Nutricional Funcional -->
+                <div class="service-card">
+                    <span class="service-pill"><i class="fas fa-stethoscope service-icon"></i> Consulta integral</span>
+                    <h3>Consulta Nutricional Funcional</h3>
+                    <p>Evaluación clínica completa a cargo de la Dra. Wandy Mejía para diseñar planes de alimentación personalizados que optimizan tu salud metabólica y digestiva.</p>
+                    <a href="contacto.html" class="btn-outline">AGENDAR CON LA DRA.</a>
+                </div>
+                <!-- Servicio 2: Control de Peso en Obesidad -->
+                <div class="service-card">
+                    <span class="service-pill"><i class="fas fa-weight-scale service-icon"></i> Control de peso</span>
+                    <h3>Control de Peso y Obesidad</h3>
+                    <p>Tratamiento clínico y metabólico dirigido por la Dra. Wandy Mejía para el manejo del sobrepeso, enfocado en habits saludables a largo plazo.</p>
+                    <a href="contacto.html" class="btn-outline">AGENDAR CON LA DRA.</a>
+                </div>
+                <!-- Servicio 3: Nutrición en Autismo (TEA) -->
+                <div class="service-card">
+                    <span class="service-pill"><i class="fas fa-puzzle-piece service-icon"></i> Nutrición pediátrica</span>
+                    <h3>Nutrición en Autismo (TEA) & TDAH</h3>
+                    <p>Abordaje nutricional pediátrico especializado por la Dra. Wandy Mejía para niños dentro del espectro autista y TDAH, gestionando la selectividad y la salud digestiva.</p>
+                    <a href="contacto.html" class="btn-outline">AGENDAR CON LA DRA.</a>
+                </div>
+            </div>
+            <!-- Botón Ver Más -->
+            <div class="text-center mt-5">
+                <a href="servicios.html" class="btn-ver-mas">VER TODOS LOS SERVICIOS DE LA DRA. →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ¿Por qué elegirnos? -->
+    <section class="why-us reveal-on-scroll">
+        <div class="container">
+            <h2 class="section-title">¿POR QUÉ ELEGIR A LA DRA. WANDY MEJÍA?</h2>
+            <div class="features-grid">
+                <div class="feature">
+                    <i class="fas fa-user-md"></i>
+                    <h3>Especialización y Experiencia</h3>
+                    <p>Como miembro de SODONUCLIM y con trayectoria en el CAID, la Dra. Wandy Mejía ofrece soluciones respaldadas por la ciencia y la práctica clínica.</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-hand-holding-heart"></i>
+                    <h3>Empatía y Acompañamiento</h3>
+                    <p>El seguimiento de la Dra. Mejía es cercano, comprensivo y enfocado en construir una relación sana con la comida sin restricciones extremas.</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-brain"></i>
+                    <h3>Abordaje Clínico Integral</h3>
+                    <p>Desde el control de la obesidad hasta tratamientos especializados en pediatría y condiciones del desarrollo, la Dra. Mejía aborda tu salud de manera holística.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Testimonios con Carrusel Mejorado -->
+<section id="testimonios" class="testimonials reveal-on-scroll">
+    <!-- Blob interactivo de fondo que sigue el cursor -->
+    <div class="testi-interactive-bg" id="testiInteractiveBg">
+        <div class="testi-glow-blob" id="testiGlowBlob1"></div>
+        <div class="testi-glow-blob" id="testiGlowBlob2"></div>
+    </div>
+    <div class="container">
+        <h2 class="section-title">TESTIMONIOS</h2>
+        <p class="testimonials-subtitle">Historias de pacientes que confían en un enfoque clínico y profesional.</p>
+        <div class="swiper testiSwiper swiper-container-custom">
+            <div class="swiper-wrapper">
+                <!-- Testimonio 1 -->
+                <div class="swiper-slide">
+                    <div class="testimonial-card">
+                        <div class="quote-icon">“</div>
+                        <div class="rating" style="color: #ffc107; margin-bottom: 12px; display: flex; gap: 4px;">
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                        </div>
+                        <p>Ella es un gran ser humano realmente la Dra. Wandy Mejía entiende mis necesidades y me ha ayudado a transformar mis hábitos alimenticios y mucho mas.</p>
+                        <div class="testimonial-author">Elisa Fernández</div>
+                        <div class="testimonial-role">Paciente</div>
+                    </div>
+                </div>
+                <!-- Testimonio 2 -->
+                <div class="swiper-slide">
+                    <div class="testimonial-card">
+                        <div class="quote-icon">“</div>
+                        <div class="rating" style="color: #ffc107; margin-bottom: 12px; display: flex; gap: 4px;">
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                        </div>
+                        <p>Gracias a la orientación de la Dra. Mejía, aprendí a comer de forma equilibrada sin sentir restricciones. Hoy me siento con más energía y confianza en mi cuerpo.</p>
+                        <div class="testimonial-author">Sarah Castro</div>
+                        <div class="testimonial-role">Paciente</div>
+                    </div>
+                </div>
+                <!-- Testimonio 3 -->
+                <div class="swiper-slide">
+                    <div class="testimonial-card">
+                        <div class="quote-icon">“</div>
+                        <div class="rating" style="color: #ffc107; margin-bottom: 12px; display: flex; gap: 4px;">
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                        </div>
+                        <p>La Dra. Wandy Mejía cambió mi vida. Con su plan nutricional personalizado logré bajar 15 kilos y controlar mi diabetes. Totalmente recomendada.</p>
+                        <div class="testimonial-author">Carlos Méndez</div>
+                        <div class="testimonial-role">Paciente</div>
+                    </div>
+                </div>
+                <!-- Testimonio 4 -->
+                <div class="swiper-slide">
+                    <div class="testimonial-card">
+                        <div class="quote-icon">“</div>
+                        <div class="rating" style="color: #ffc107; margin-bottom: 12px; display: flex; gap: 4px;">
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                        </div>
+                        <p>Excelente profesional. Mi hijo con TEA ha mejorado su alimentación gracias a las estrategias de la Dra. Mejía. Un enfoque humano y efectivo.</p>
+                        <div class="testimonial-author">María Fernanda</div>
+                        <div class="testimonial-role">Madre de paciente</div>
+                    </div>
+                </div>
+                <!-- Testimonio 5 -->
+                <div class="swiper-slide">
+                    <div class="testimonial-card">
+                        <div class="quote-icon">“</div>
+                        <div class="rating" style="color: #ffc107; margin-bottom: 12px; display: flex; gap: 4px;">
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                            <i class="fas fa-star star"></i>
+                        </div>
+                        <p>La mejor nutrióloga que he conocido. Me ayudó a perder peso de forma saludable y a mantenerlo. Su acompañamiento es constante y motivador.</p>
+                        <div class="testimonial-author">Laura Jiménez</div>
+                        <div class="testimonial-role">Paciente</div>
+                    </div>
+                </div>
+            </div>
+            <!-- Controles de Swiper -->
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </div>
+</section>
+
+    <!-- Banner Programa tu Cita -->
+    <section class="banner-cita">
+        <div class="video-container">
+            <video autoplay loop muted playsinline class="video-bg" id="bannerVideo">
+                <source src="assets/videos/cta-banner-bg.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="banner-overlay-pink"></div>
+        <div class="container">
+            <h2>Comienza tu Transformación</h2>
+            <p>Ya sea para una consulta individual de alta precisión o para una alianza corporativa de bienestar, diseñemos juntos el camino hacia un legado de salud inquebrantable.</p>
+            <div class="banner-cta-group">
+                <a href="contacto.html" class="btn-banner">AGENDAR CITA</a>
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=drawandymejiard@gmail.com&su=Consulta%20de%20Servicios%20Corporativos%20o%20Alianza" target="_blank" class="btn-banner-outline">COLABORAR CON LA DRA.</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog con Carrusel -->
+    <section class="blog">
+    <div class="container">
+        <div class="blog-header">
+            <p class="small-title">PUBLICACIONES PROFESIONALES</p>
+            <h2 class="section-title">Contenido que respalda la experiencia clínica</h2>
+            <p class="section-description">Artículos, casos y guías de nutrición que reflejan el trabajo de Wandy y su enfoque científico en cada consulta.</p>
+        </div>
+        <div class="swiper blogSwiper swiper-container-custom">
+            <div class="swiper-wrapper">
+                <!-- Blog 1 -->
+                <div class="swiper-slide">
+                    <div class="blog-card">
+                        <div class="blog-img" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgKD8oMEysWcfi4Qia2TPiAucXSehxR0MSvQ&s');"></div>
+                        <div class="blog-content">
+                            <span class="blog-tag">Evidencia Clínica</span>
+                            <h3>La alimentación como pilar de la salud</h3>
+                            <p>Guía práctica para mantener una microbiota intestinal saludable y mejorar el bienestar general con intervenciones nutricionales.</p>
+                            <a href="https://hoy.com.do/vivir/nutricion/alimentacion-pilar-salud_1082348.html" target="_blank" class="btn-outline">Leer más</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Blog 2 -->
+                <div class="swiper-slide">
+                    <div class="blog-card">
+                        <div class="blog-img" style="background-image: url('https://img.mmc.com.do/elcaribe-bucket/uploads/2026/04/7.-Addressing-Eating-Issues-With-Children-With-Autism-1030x686-1-1024x682.jpg');"></div>
+                        <div class="blog-content">
+                            <span class="blog-tag">Nutrición Infantil</span>
+                            <h3>Deficiencias nutricionales y TEA</h3>
+                            <p>Un enfoque integral para detectar y corregir deficiencias en niños con autismo, mejorando su desarrollo y comportamiento.</p>
+                            <a href="https://www.elcaribe.com.do/gente/estilo/deficiencias-nutricionales-afectan-el-desarrollo-de-ninos-con-tea/" target="_blank" class="btn-outline">Leer más</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Blog 3 -->
+                <div class="swiper-slide">
+                    <div class="blog-card">
+                        <div class="blog-img" style="background-image: url('assets/images/charlas-corporativas.webp');"></div>
+                        <div class="blog-content">
+                            <span class="blog-tag">Formación</span>
+                            <h3>Educación nutricional en CAID</h3>
+                            <p>La Dra. Wandy comparte su experiencia en programas educativos que fortalecen hábitos saludables desde la infancia.</p>
+                            <a href="https://das.edu.do/dra-wandy-mejia-caid-impulsa-la-educacion-nutricional-a-nuestros-estudiantes-durante-la-semana-de-la-salud-y-seguridad-2/" target="_blank" class="btn-outline">Leer más</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Blog 4 -->
+                <div class="swiper-slide">
+                    <div class="blog-card">
+                        <div class="blog-img" style="background-image: url('assets/images/healthy-wellness.jpg');"></div>
+                        <div class="blog-content">
+                            <span class="blog-tag">Consejos Prácticos</span>
+                            <h3>Diseña tu propio plan nutricional</h3>
+                            <p>Estrategias sencillas para estructurar una alimentación personalizada que se adapte a objetivos reales de salud.</p>
+                            <a href="https://hoy.com.do/vivir/disena-tu-propio-plan-nutricional_1028348.html" target="_blank" class="btn-outline">Leer más</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Blog 5 -->
+                <div class="swiper-slide">
+                    <div class="blog-card">
+                        <div class="blog-img" style="background-image: url('assets/images/down-syndrome-nutrition.jpg');"></div>
+                        <div class="blog-content">
+                            <span class="blog-tag">Salud Especializada</span>
+                            <h3>Nutrición y Síndrome de Down</h3>
+                            <p>Recomendaciones nutricionales clave para mejorar la calidad de vida y el bienestar de personas con Síndrome de Down.</p>
+                            <a href="https://hoy.com.do/opinion/nutricion-y-sindrome-de-down_908132.html" target="_blank" class="btn-outline">Leer más</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Controles de Swiper -->
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </div>
+</section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-logo">
+                        <img src="assets/images/logo-wandy-mejia.png" alt="Logo Dra. Wandy Mejía" class="footer-logo-img">
+                        <div class="footer-logo-text">
+                            <h3>Dra. Wandy Mejía</h3>
+                            <p>Nutrióloga Clínica</p>
+                        </div>
+                    </div>
+                    <div class="footer-about">
+                        <p>Especialista en nutrición clínica, obesidad, nutrición infantil, autismo y TDAH.</p>
+                    </div>
+                </div>
+                <div>
+                    <h4>Enlaces Rápidos</h4>
+                    <ul class="footer-links">
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#sobre-mi">Sobre mí</a></li>
+                        <li><a href="servicios.html">Servicios</a></li>
+                        <li><a href="#testimonios">Testimonios</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Consultorios</h4>
+                    <ul class="footer-links">
+                        <li><a href="contacto.html#sinad-salud">SINAD SALUD</a></li>
+                        <li><a href="contacto.html#medkids-center">Medkids Center</a></li>
+                        <li><a href="contacto.html#insight">INSIGHT</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Contacto</h4>
+                    <div class="footer-contact">
+                        <p><i class="fas fa-phone"></i> 809-459-2222</p>
+                        <p><i class="fas fa-envelope"></i> <a href="mailto:drawandymejiard@gmail.com">drawandymejiard@gmail.com</a></p>
+                        <p><i class="fab fa-instagram"></i> @drawandymejiard</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Dra. Wandy Mejía. Todos los derechos reservados.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Términos y Condiciones</a>
+                    <a href="#">Política de Privacidad</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        var testiSwiperOptions = {
+          slidesPerView: 1,
+          spaceBetween: 30,
+          loop: true,
+          autoplay: {
+            delay: 5200,
+            disableOnInteraction: false,
+          },
+          speed: 800,
+          pagination: {
+            el: ".testiSwiper .swiper-pagination",
+            clickable: true,
+          },
+          navigation: {
+            nextEl: ".testiSwiper .swiper-button-next",
+            prevEl: ".testiSwiper .swiper-button-prev",
+          },
+          breakpoints: {
+            768: {
+              slidesPerView: 2,
+              spaceBetween: 30,
+            },
+            1024: {
+              slidesPerView: 3,
+              spaceBetween: 30,
+            },
+          },
+        };
+
+        var blogSwiperOptions = {
+          slidesPerView: 1,
+          spaceBetween: 30,
+          loop: true,
+          autoplay: {
+            delay: 6000,
+            disableOnInteraction: false,
+          },
+          speed: 1000,
+          pagination: {
+            el: ".blogSwiper .swiper-pagination",
+            clickable: true,
+          },
+          navigation: {
+            nextEl: ".blogSwiper .swiper-button-next",
+            prevEl: ".blogSwiper .swiper-button-prev",
+          },
+          breakpoints: {
+            768: {
+              slidesPerView: 2,
+              spaceBetween: 30,
+            },
+            1024: {
+              slidesPerView: 3,
+              spaceBetween: 30,
+            },
+          },
+        };
+
+        setTimeout(() => {
+          if (document.querySelector('.testiSwiper')) {
+            new Swiper(".testiSwiper", testiSwiperOptions);
+          }
+          if (document.querySelector('.blogSwiper')) {
+            new Swiper(".blogSwiper", blogSwiperOptions);
+          }
+          if (document.querySelector('.certSwiper')) {
+            new Swiper(".certSwiper", {
+              loop: true,
+              slidesPerView: 1,
+              spaceBetween: 24,
+              autoplay: {
+                delay: 2800,
+                disableOnInteraction: false,
+              },
+              pagination: {
+                el: ".certSwiper .swiper-pagination",
+                clickable: true,
+              },
+              breakpoints: {
+                768: {
+                  slidesPerView: 2,
+                },
+                1024: {
+                  slidesPerView: 3,
+                },
+              },
+            });
+          }
+          // Refresh ScrollTrigger once Swiper is fully loaded and layout has stabilized
+          if (typeof ScrollTrigger !== 'undefined') {
+            ScrollTrigger.refresh();
+          }
+        }, 100);
+      });
+    </script>
+    <!-- GSAP y ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="js/scripts.js"></script>
+    <script src="js/animaciones.js"></script>
+    <script src="js/chatbot.js"></script>
+</body>
+</html>

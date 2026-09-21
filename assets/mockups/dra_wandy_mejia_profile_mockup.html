@@ -1,0 +1,72 @@
+
+<style>
+  .profile-section { display: flex; gap: 0; min-height: 520px; background: var(--color-background-primary); border-radius: var(--border-radius-lg); border: 0.5px solid var(--color-border-tertiary); overflow: hidden; }
+  .photo-side { flex: 0 0 42%; background: #c8b8a2; position: relative; min-height: 480px; display: flex; align-items: flex-end; }
+  .photo-placeholder { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; background: linear-gradient(160deg, #d4c4b0 0%, #b8a48e 100%); }
+  .avatar-circle { width: 120px; height: 120px; border-radius: 50%; background: #e8ddd0; border: 3px solid rgba(255,255,255,0.6); display: flex; align-items: center; justify-content: center; font-size: 36px; font-weight: 500; color: #7a6a5a; }
+  .photo-label { font-size: 13px; color: rgba(255,255,255,0.8); text-align: center; }
+  .accent-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 6px; background: #8B2252; }
+  .info-side { flex: 1; padding: 2.5rem 2rem; display: flex; flex-direction: column; justify-content: center; gap: 20px; }
+  .name-block { border-left: 4px solid #8B2252; padding-left: 16px; }
+  .doctor-name { font-size: 26px; font-weight: 500; color: var(--color-text-primary); margin: 0 0 4px; letter-spacing: -0.3px; }
+  .doctor-title { font-size: 13px; font-weight: 500; color: #8B2252; margin: 0; text-transform: uppercase; letter-spacing: 0.8px; }
+  .bio-text { font-size: 14px; color: var(--color-text-secondary); line-height: 1.7; margin: 0; }
+  .specialties { display: flex; flex-direction: column; gap: 8px; }
+  .specialty-item { display: flex; align-items: flex-start; gap: 10px; font-size: 13.5px; color: var(--color-text-secondary); line-height: 1.5; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: #8B2252; flex-shrink: 0; margin-top: 5px; }
+  .credentials { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
+  .badge { font-size: 11px; font-weight: 500; padding: 4px 10px; border-radius: 20px; background: var(--color-background-secondary); color: var(--color-text-secondary); border: 0.5px solid var(--color-border-tertiary); }
+  .cta-btn { display: inline-flex; align-items: center; gap: 8px; background: #8B2252; color: white; border: none; padding: 10px 20px; border-radius: var(--border-radius-md); font-size: 14px; cursor: pointer; width: fit-content; }
+  .divider { height: 0.5px; background: var(--color-border-tertiary); }
+</style>
+
+<h2 class="sr-only">Mockup de la sección de presentación de la Dra. Wandy Mejía en página web</h2>
+
+<div style="padding: 0.5rem 0 1.5rem; font-size: 12px; color: var(--color-text-tertiary); font-weight: 500; text-transform: uppercase; letter-spacing: 0.8px;">Vista previa — Opción A: Clásica horizontal</div>
+
+<div class="profile-section">
+  <div class="photo-side">
+    <div class="photo-placeholder">
+      <div class="avatar-circle">WM</div>
+      <div class="photo-label">Foto de la<br>Dra. Wandy Mejía</div>
+    </div>
+    <div class="accent-bar"></div>
+  </div>
+  <div class="info-side">
+    <div class="name-block">
+      <p class="doctor-name">Dra. Wandy Mejía</p>
+      <p class="doctor-title">Nutrióloga Clínica</p>
+    </div>
+    <p class="bio-text">Especialista en Ciencias de la Alimentación y Nutrición Clínica en la República Dominicana. Miembro activo de la Sociedad Dominicana de Nutrición Clínica y Metabolismo (SODONUCLIM) y especialista en el Centro de Atención Integral para la Discapacidad (CAID).</p>
+    <div class="divider"></div>
+    <div class="specialties">
+      <div class="specialty-item"><div class="dot"></div><span>Control de peso, obesidad y salud hormonal en las diferentes etapas de la mujer</span></div>
+      <div class="specialty-item"><div class="dot"></div><span>Abordaje integral en nutrición pediátrica, autismo (TEA), TDAH y selectividad alimentaria</span></div>
+      <div class="specialty-item"><div class="dot"></div><span>Soluciones nutricionales personalizadas basadas en evidencia científica</span></div>
+    </div>
+    <div class="credentials">
+      <span class="badge"><i class="ti ti-certificate" aria-hidden="true"></i> SODONUCLIM</span>
+      <span class="badge"><i class="ti ti-building-hospital" aria-hidden="true"></i> CAID</span>
+      <span class="badge"><i class="ti ti-stethoscope" aria-hidden="true"></i> Nutrición integral</span>
+    </div>
+    <button class="cta-btn" onclick="sendPrompt('¿Puedes mostrarme otra variante del diseño del perfil de la doctora, quizás con un estilo más moderno o minimalista?')">
+      <i class="ti ti-calendar" aria-hidden="true"></i> Agendar consulta ↗
+    </button>
+  </div>
+</div>
+
+<div style="padding: 2rem 0 0.5rem; font-size: 12px; color: var(--color-text-tertiary); font-weight: 500; text-transform: uppercase; letter-spacing: 0.8px;">Vista previa — Opción B: Tarjeta centrada</div>
+
+<div style="background: var(--color-background-secondary); border-radius: var(--border-radius-lg); padding: 2.5rem; text-align: center; border: 0.5px solid var(--color-border-tertiary);">
+  <div style="width: 100px; height: 100px; border-radius: 50%; background: #e8ddd0; border: 4px solid #8B2252; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 500; color: #7a6a5a; margin: 0 auto 16px;">WM</div>
+  <p style="font-size: 22px; font-weight: 500; margin: 0 0 4px; color: var(--color-text-primary);">Dra. Wandy Mejía</p>
+  <p style="font-size: 12px; color: #8B2252; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; margin: 0 0 20px;">Nutrióloga Clínica · Santo Domingo, RD</p>
+  <div style="height: 0.5px; background: var(--color-border-tertiary); margin-bottom: 20px;"></div>
+  <p style="font-size: 14px; color: var(--color-text-secondary); line-height: 1.7; max-width: 480px; margin: 0 auto 20px;">Especialista en nutrición integral, infantil y metabólica con amplia trayectoria en la República Dominicana.</p>
+  <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+    <span class="badge">Nutrición infantil</span>
+    <span class="badge">Salud hormonal</span>
+    <span class="badge">Metabolismo</span>
+    <span class="badge">SODONUCLIM</span>
+  </div>
+</div>

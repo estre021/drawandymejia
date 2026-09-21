@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Checkout - Dr. Wandy Mejía</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="body-con-fondo">
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Modern Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="assets/images/logo-wandy-mejia.png" alt="Logo Dr. Wandy Mejía" class="logo-img">
+                <div class="logo-text">
+                    <h1>Dr. Wandy Mejía</h1>
+                    <p>CLINICAL NUTRITIONIST</p>
+                </div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index_en.html">HOME</a></li>
+                <li><a href="index_en.html#sobre-mi">ABOUT ME</a></li>
+                <li><a href="servicios_en.html">SERVICES</a></li>
+                <li><a href="index_en.html#testimonios">TESTIMONIALS</a></li>
+                <li><a href="contacto_en.html">CONTACT</a></li>
+            </ul>
+            <a href="registro_en.html" class="btn-cita">BOOK APPOINTMENT</a>
+            
+            <div class="lang-selector">
+                <i class="fas fa-globe"></i>
+                <a href="#" id="langEsBtn" class="lang-btn">ES</a>
+                <span class="lang-separator">|</span>
+                <a href="#" id="langEnBtn" class="lang-btn active">EN</a>
+            </div>
+            
+            <!-- Hamburger menu button -->
+            <button class="menu-btn" id="menuBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile menu -->
+    <ul class="nav-links-mobile" id="mobileMenu">
+        <li class="menu-mobile-header">
+            <div class="menu-mobile-title">
+                <h3>Dr. Wandy Mejía</h3>
+                <p>CLINICAL NUTRITIONIST</p>
+            </div>
+            <img src="assets/images/logo-wandy-mejia.png" alt="Logo Dr. Wandy Mejía" class="menu-mobile-logo">
+        </li>
+        <hr class="menu-mobile-divider">
+        <li><a href="index_en.html">HOME</a></li>
+        <li><a href="index_en.html#sobre-mi">ABOUT ME</a></li>
+        <li><a href="servicios_en.html">SERVICES</a></li>
+        <li><a href="index_en.html#testimonios">TESTIMONIOS</a></li>
+        <li><a href="contacto_en.html">CONTACT</a></li>
+        <li><a href="registro_en.html" class="btn-cita-mobile">BOOK APPOINTMENT</a></li>
+    </ul>
+
+    <main class="checkout-section">
+        <div class="container">
+            <div class="checkout-grid">
+                
+                <!-- Left Column: Payment Methods and Forms -->
+                <div class="checkout-card" id="mainPaymentCard">
+                    <h2 class="checkout-title" id="checkoutTitleText">Secure Payment Method</h2>
+                    
+                    <div class="payment-methods">
+                        <button class="payment-tab-btn active" onclick="switchTab('tarjeta')">
+                            <i class="fas fa-credit-card"></i> Card
+                        </button>
+                        <button class="payment-tab-btn" onclick="switchTab('paypal')">
+                            <i class="fab fa-paypal"></i> PayPal
+                        </button>
+                        <button class="payment-tab-btn" onclick="switchTab('transferencia')">
+                            <i class="fas fa-bank"></i> Bank Transfer
+                        </button>
+                    </div>
+
+                    <!-- 1. Card Form -->
+                    <div id="content-tarjeta" class="payment-content active">
+                        <!-- Dynamic Card Preview -->
+                        <div class="card-preview">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div class="card-preview-chip"></div>
+                                <i class="fab fa-cc-visa" style="font-size: 2.2rem;" id="cardBrandIcon"></i>
+                            </div>
+                            <div class="card-preview-number" id="previewNumber">•••• •••• •••• ••••</div>
+                            <div class="card-preview-info">
+                                <div>
+                                    <span style="font-size: 0.55rem; opacity: 0.6; display:block;">Cardholder</span>
+                                    <span id="previewName">Name on Card</span>
+                                </div>
+                                <div>
+                                    <span style="font-size: 0.55rem; opacity: 0.6; display:block;">Expires</span>
+                                    <span id="previewExpiry">MM/YY</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Form Inputs -->
+                        <form id="cardForm" onsubmit="processPayment(event, 'Credit Card')">
+                            <div class="form-group">
+                                <label>Cardholder Name *</label>
+                                <input type="text" id="cardName" required placeholder="e.g. John Doe" oninput="updateCardPreview()">
+                            </div>
+                            <div class="form-group">
+                                <label>Card Number *</label>
+                                <input type="text" id="cardNumber" required placeholder="4000 1234 5678 9010" maxlength="19" oninput="formatCardNumber(this); updateCardPreview();">
+                            </div>
+                            <div class="card-inputs-grid">
+                                <div class="form-group">
+                                    <label>Expiration Date *</label>
+                                    <input type="text" id="cardExpiry" required placeholder="MM/YY" maxlength="5" oninput="formatExpiry(this); updateCardPreview();">
+                                </div>
+                                <div class="form-group">
+                                    <label>CVV *</label>
+                                    <input type="password" id="cardCvv" required placeholder="123" maxlength="4">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn-primary" style="width: 100%; padding: 16px; font-size: 1.05rem; margin-top: 20px;">Pay Securely</button>
+                        </form>
+                    </div>
+
+                    <!-- 2. PayPal Form -->
+                    <div id="content-paypal" class="payment-content">
+                        <p style="color: var(--text-muted); margin-bottom: 25px; line-height: 1.6; text-align: center;">Click the button below to initiate your secure payment with PayPal. You will be redirected to a payment simulation screen.</p>
+                        <button class="paypal-mock-btn" onclick="processPayment(event, 'PayPal')">
+                            <i class="fab fa-paypal"></i> Pay with PayPal
+                        </button>
+                    </div>
+
+                    <!-- 3. Bank Transfer Form -->
+                    <div id="content-transferencia" class="payment-content">
+                        <div class="bank-instructions">
+                            <h5>Bank Transfer Instructions</h5>
+                            <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 15px; line-height: 1.5;">You can make a direct transfer to any of our official bank accounts in the Dominican Republic:</p>
+                            
+                            <div class="bank-account-box">
+                                <strong>Banco Popular Dominicano</strong><br>
+                                Checking Cta: 789456123<br>
+                                Beneficiary: Dr. Wandy Mejía
+                            </div>
+                            <div class="bank-account-box">
+                                <strong>Banco BHD León</strong><br>
+                                Savings Cta: 987654321<br>
+                                Beneficiary: Dr. Wandy Mejía
+                            </div>
+                            
+                            <p style="font-size: 0.82rem; color: var(--primary-dark); font-weight: 600; margin-top: 15px;"><i class="fas fa-info-circle"></i> Important: After the transfer is complete, click the button below to notify and send the receipt to the doctor.</p>
+                        </div>
+                        <button class="btn-primary" style="width: 100%; padding: 15px;" onclick="processPayment(event, 'Bank Transfer')">Confirm & Notify Transfer</button>
+                    </div>
+
+                </div>
+
+                <!-- Processing / Success Panel -->
+                <div class="checkout-card" id="loadingPaymentCard" style="display: none; min-height: 400px; align-items: center; justify-content: center;">
+                    <div class="payment-loading active">
+                        <div class="spinner"></div>
+                        <h3 id="loadingText">Processing secure payment...</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 5px;">Please do not close or reload the page.</p>
+                    </div>
+                </div>
+
+                <div class="checkout-card" id="successPaymentCard" style="display: none;">
+                    <div class="payment-success active">
+                        <div class="success-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <h2 class="success-title" id="successTitleText">Registration Processed!</h2>
+                        <p class="success-desc" id="successDescText">Your virtual service request has been successfully validated. Please click the button below to send your appointment details and payment confirmation email directly to Dr. Wandy Mejía.</p>
+                        <div class="success-actions">
+                            <button class="btn-primary" id="btnGmailAction" style="width: 100%; font-size: 1.05rem; padding: 16px; box-shadow: 0 10px 25px rgba(212,120,140,0.3);">
+                                <i class="far fa-envelope"></i> Send Registration to Gmail
+                            </button>
+                            <a href="index_en.html" class="btn-outline" style="width: 100%; padding: 12px;" id="btnReturnText">Return to Home</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Purchase Summary -->
+                <div class="summary-card" id="summaryCard">
+                    <h3 class="summary-title" id="summaryTitleText">Purchase Summary</h3>
+                    
+                    <div id="summaryItems">
+                        <!-- Populated dynamically -->
+                    </div>
+                    
+                    <div class="summary-row total">
+                        <span id="summaryTotalText">Total to pay</span>
+                        <span id="summaryTotalValue">$50.00 USD</span>
+                    </div>
+
+                    <!-- Patient details if coming from registration -->
+                    <div id="patientDetailsBox" style="margin-top: 25px; padding-top: 20px; border-top: 1px dashed var(--gray); display: none;">
+                        <h4 style="font-size: 0.95rem; font-family: 'DM Sans', sans-serif; color: var(--primary-dark); margin-bottom: 10px; font-weight: 700;" id="summaryPatientTitle">Appointment Details:</h4>
+                        <div style="font-size: 0.85rem; color: #555; line-height: 1.5;" id="patientDetailsContent">
+                            <!-- Populated with JS -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-logo">
+                        <img src="assets/images/logo-wandy-mejia.png" alt="Logo" class="footer-logo-img">
+                        <div class="footer-logo-text">
+                            <h3>Dr. Wandy Mejía</h3>
+                            <p>Clinical Nutritionist</p>
+                        </div>
+                    </div>
+                    <div class="footer-about">
+                        <p>Specialist in clinical nutrition, obesity, pediatric nutrition, autism, and ADHD.</p>
+                    </div>
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index_en.html">Home</a></li>
+                        <li><a href="index_en.html#sobre-mi">About Me</a></li>
+                        <li><a href="servicios_en.html">Services</a></li>
+                        <li><a href="index_en.html#testimonios">Testimonials</a></li>
+                        <li><a href="contacto_en.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Clinics</h4>
+                    <ul class="footer-links">
+                        <li><a href="contacto_en.html#sinad-salud">SINAD SALUD</a></li>
+                        <li><a href="contacto_en.html#medkids-center">Medkids Center</a></li>
+                        <li><a href="contacto_en.html#insight">INSIGHT</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Contact Info</h4>
+                    <div class="footer-contact">
+                        <p><i class="fas fa-phone"></i> 809-459-2222</p>
+                        <p><i class="fas fa-envelope"></i> <a href="mailto:drawandymejiard@gmail.com">drawandymejiard@gmail.com</a></p>
+                        <p><i class="fab fa-instagram"></i> @drawandymejiard</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Set language buttons dynamically
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentUrl = new URL(window.location.href);
+            const itemParam = currentUrl.searchParams.get('item') || '';
+            
+            document.getElementById('langEsBtn').addEventListener('click', (e) => {
+                e.preventDefault();
+                window.location.href = `pago.html?item=${itemParam}`;
+            });
+            document.getElementById('langEnBtn').addEventListener('click', (e) => {
+                e.preventDefault();
+                window.location.href = `pago_en.html?item=${itemParam}`;
+            });
+        });
+
+        // Toggle payment tabs
+        function switchTab(tabId) {
+            document.querySelectorAll('.payment-tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.payment-content').forEach(content => content.classList.remove('active'));
+            
+            const targetBtn = Array.from(document.querySelectorAll('.payment-tab-btn')).find(btn => btn.innerText.toLowerCase().includes(tabId === 'tarjeta' ? 'card' : tabId === 'paypal' ? 'paypal' : 'transfer'));
+            if (targetBtn) targetBtn.classList.add('active');
+            
+            const targetContent = document.getElementById(`content-${tabId}`);
+            if (targetContent) targetContent.classList.add('active');
+        }
+
+        // Form formatters
+        function formatCardNumber(input) {
+            let value = input.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+            let formatted = '';
+            for (let i = 0; i < value.length; i++) {
+                if (i > 0 && i % 4 === 0) formatted += ' ';
+                formatted += value[i];
+            }
+            input.value = formatted;
+        }
+
+        function formatExpiry(input) {
+            let value = input.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+            if (value.length > 2) {
+                input.value = value.substring(0, 2) + '/' + value.substring(2, 4);
+            } else {
+                input.value = value;
+            }
+        }
+
+        function updateCardPreview() {
+            const nameInput = document.getElementById('cardName').value;
+            const numberInput = document.getElementById('cardNumber').value;
+            const expiryInput = document.getElementById('cardExpiry').value;
+            const brandIcon = document.getElementById('cardBrandIcon');
+
+            document.getElementById('previewName').innerText = nameInput ? nameInput : 'Cardholder Name';
+            document.getElementById('previewNumber').innerText = numberInput ? numberInput : '•••• •••• •••• ••••';
+            document.getElementById('previewExpiry').innerText = expiryInput ? expiryInput : 'MM/YY';
+
+            if (numberInput.startsWith('4')) {
+                brandIcon.className = 'fab fa-cc-visa';
+                brandIcon.style.color = '#37a2e8';
+            } else if (numberInput.startsWith('5')) {
+                brandIcon.className = 'fab fa-cc-mastercard';
+                brandIcon.style.color = '#eb5757';
+            } else if (numberInput.startsWith('3')) {
+                brandIcon.className = 'fab fa-cc-amex';
+                brandIcon.style.color = '#27ae60';
+            } else {
+                brandIcon.className = 'fas fa-credit-card';
+                brandIcon.style.color = 'white';
+            }
+        }
+
+        // Load purchase summary details
+        let itemTitle = "Virtual Nutritional Consultation";
+        let itemPriceUSD = 50.00;
+        let itemPriceDOP = 3000;
+        let appointmentData = null;
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const itemType = urlParams.get('item');
+
+        if (itemType === 'charla-tea') {
+            itemTitle = "Lecture: Nutrition in Autism (ASD) & ADHD";
+            itemPriceUSD = 25.00;
+            itemPriceDOP = 1500;
+        } else if (itemType === 'charla-microbiota') {
+            itemTitle = "Lecture: Microbiota & Your Second Brain";
+            itemPriceUSD = 20.00;
+            itemPriceDOP = 1200;
+        } else if (itemType === 'charla-habitos') {
+            itemTitle = "Lecture: Sustainable Habits Without Dieting";
+            itemPriceUSD = 15.00;
+            itemPriceDOP = 900;
+        } else {
+            appointmentData = JSON.parse(sessionStorage.getItem('temp_cita_data'));
+            if (appointmentData) {
+                itemTitle = "Virtual Nutritional Consultation";
+                itemPriceUSD = 50.00;
+                itemPriceDOP = 3000;
+                
+                document.getElementById('patientDetailsBox').style.display = 'block';
+                document.getElementById('patientDetailsContent').innerHTML = `
+                    <strong>Patient:</strong> ${appointmentData.nombre}<br>
+                    <strong>Age:</strong> ${appointmentData.edad} years old<br>
+                    <strong>WhatsApp:</strong> ${appointmentData.telefono}<br>
+                    <strong>Suggested Date:</strong> ${appointmentData.fecha}<br>
+                    <strong>Reason:</strong> ${appointmentData.motivo}
+                `;
+            }
+        }
+
+        document.getElementById('summaryItems').innerHTML = `
+            <div class="summary-row" style="font-weight: 600; color: var(--text-dark);">
+                <span>${itemTitle}</span>
+                <span>$${itemPriceUSD.toFixed(2)} USD</span>
+            </div>
+            <div class="summary-row" style="font-size: 0.8rem; margin-top: -5px;">
+                <span>Approximate DOP equivalent:</span>
+                <span>RD$ ${itemPriceDOP.toLocaleString()}</span>
+            </div>
+        `;
+        document.getElementById('summaryTotalValue').innerText = `$${itemPriceUSD.toFixed(2)} USD`;
+
+        // Process payment mock
+        function processPayment(event, method) {
+            event.preventDefault();
+            
+            document.getElementById('mainPaymentCard').style.display = 'none';
+            document.getElementById('loadingPaymentCard').style.display = 'flex';
+            
+            setTimeout(() => {
+                document.getElementById('loadingPaymentCard').style.display = 'none';
+                document.getElementById('successPaymentCard').style.display = 'block';
+                
+                setupGmailButton(method);
+            }, 2000);
+        }
+
+        // Email setup
+        function setupGmailButton(paymentMethod) {
+            const emailDestination = "drawandymejiard@gmail.com";
+            let emailSubject = "";
+            let emailBody = "";
+
+            if (appointmentData) {
+                emailSubject = `Virtual Appointment Request - ${appointmentData.nombre}`;
+                emailBody = `Hello Dr. Wandy Mejía,
+
+I hope this email finds you well. I have completed the registration for my virtual appointment on your website and made the corresponding payment.
+
+Here are my details:
+
+- Full name: ${appointmentData.nombre}
+- Email address: ${appointmentData.email}
+- Phone / WhatsApp: ${appointmentData.telefono}
+- Patient's age: ${appointmentData.edad}
+- Suggested date: ${appointmentData.fecha}
+- Selected clinic: ${appointmentData.consultorio}
+- Reason for consultation: ${appointmentData.motivo}
+
+PAYMENT DETAILS:
+- Service: Virtual Nutritional Consultation
+- Amount: $50.00 USD / RD$ 3,000
+- Method used: ${paymentMethod}
+- Payment status: Confirmed / Pending Verification
+
+I look forward to your instructions and the link for our virtual session. Thank you very much!`;
+            } else {
+                emailSubject = `Virtual Lecture Purchase - ${itemTitle}`;
+                emailBody = `Hello Dr. Wandy Mejía,
+
+I have purchased access to your recorded virtual lecture from your website.
+
+REQUESTER DETAILS:
+- Email to receive access: (Please enter your email here)
+- Full name: (Please enter your name here)
+
+PAYMENT DETAILS:
+- Purchased lecture: ${itemTitle}
+- Amount: $${itemPriceUSD.toFixed(2)} USD / RD$ ${itemPriceDOP}
+- Method used: ${paymentMethod}
+- Payment status: Confirmed
+
+I look forward to receiving the link and credentials to watch the virtual lecture. Thank you very much!`;
+            }
+
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            const gmailBtn = document.getElementById('btnGmailAction');
+
+            gmailBtn.addEventListener('click', () => {
+                if (isMobile) {
+                    window.location.href = `mailto:${emailDestination}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+                } else {
+                    window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${emailDestination}&su=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`, "_blank");
+                }
+                sessionStorage.removeItem('temp_cita_data');
+            });
+        }
+    </script>
+    <script src="js/scripts.js"></script>
+    <script src="js/chatbot.js"></script>
+</body>
+</html>

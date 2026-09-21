@@ -1,0 +1,20 @@
+{
+	"name": "pagina-mami",
+	"version": "1.0.0",
+	"description": "Sitio estático de la Página mami",
+	"main": "index.js",
+	"type": "module",
+	"scripts": {
+		"start": "node server.js",
+		"dev": "node --watch server.js"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"dotenv": "^16.4.7",
+		"express": "^4.21.2",
+		"nodemailer": "^6.9.16",
+		"ogl": "^1.0.11"
+	}
+}
