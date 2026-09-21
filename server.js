@@ -13,6 +13,10 @@ const doctorWhatsApp = (process.env.DOCTOR_WHATSAPP || '18094592222').replace(/\
 app.use(express.json({ limit: '32kb' }));
 app.use(express.static(__dirname));
 
+app.get('/', (_req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
 function clean(value, max = 250) {
   return String(value ?? '').trim().slice(0, max);
 }
