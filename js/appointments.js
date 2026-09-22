@@ -103,10 +103,6 @@ document.addEventListener('DOMContentLoaded', () => {
             form.reset();
             redirectToWhatsApp(appointment, result.whatsappNumber);
         } catch (error) {
-            const message = error instanceof TypeError
-                ? (isEnglish ? 'The appointment server is unavailable. Use one of the direct contact options below.' : 'El servidor de citas no está disponible. Usa una de las opciones de contacto directo.')
-                : error.message || (isEnglish ? 'The request could not be processed. Use one of the direct contact options below.' : 'No pudimos procesar la solicitud. Usa una de las opciones de contacto directo.');
-            setStatus(message, 'is-error');
             const fallbackNumber = value('consultorio').toLowerCase().includes('sinad')
                 ? '18095428898'
                 : value('consultorio').toLowerCase().includes('medkids')
@@ -114,6 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     : value('consultorio').toLowerCase().includes('insight')
                         ? '18492621997'
                         : '18094592222';
+            setStatus(isEnglish ? 'Opening WhatsApp...' : 'Abriendo WhatsApp...', 'is-success');
             window.setTimeout(() => redirectToWhatsApp(appointment, fallbackNumber), 250);
         } finally {
             submitButton.disabled = false;
