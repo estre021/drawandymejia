@@ -1,22 +1,5 @@
 document.documentElement.classList.add('js-enabled');
 
-// Keep the first screen responsive on slow connections, then load the decorative video.
-document.addEventListener('DOMContentLoaded', () => {
-    const heroVideo = document.getElementById('heroVideo');
-    if (!heroVideo) return;
-
-    const loadHeroVideo = () => {
-        heroVideo.load();
-        heroVideo.play().catch(() => {});
-    };
-
-    if ('requestIdleCallback' in window) {
-        window.requestIdleCallback(loadHeroVideo, { timeout: 1800 });
-    } else {
-        window.setTimeout(loadHeroVideo, 1200);
-    }
-});
-
 document.addEventListener('DOMContentLoaded', () => {
     console.log("Navegación por Carrusel ahora está delegada a Puro CSS.");
 
