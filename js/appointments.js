@@ -15,9 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const addFallbackLinks = (appointment, whatsappNumber = '18094592222') => {
-        const message = isEnglish
-            ? `Hello, I want to schedule an appointment from the website. Name: ${appointment.name}. Email: ${appointment.email}. Phone: ${appointment.phone}. Suggested date: ${appointment.appointmentDate || 'to coordinate'}. Reason: ${appointment.reason}`
-            : `Hola, quiero agendar una cita desde la página web. Nombre: ${appointment.name}. Correo: ${appointment.email}. Teléfono: ${appointment.phone}. Fecha sugerida: ${appointment.appointmentDate || 'por coordinar'}. Motivo: ${appointment.reason}`;
+        const message = buildWhatsAppMessage(appointment);
         const whatsappLink = document.createElement('a');
         whatsappLink.href = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
         whatsappLink.target = '_blank';
@@ -31,6 +29,23 @@ document.addEventListener('DOMContentLoaded', () => {
         emailLink.innerHTML = '<i class="fas fa-envelope"></i> ' + (isEnglish ? 'Send by email' : 'Enviar por correo');
 
         status.append(document.createElement('br'), whatsappLink, document.createTextNode(' · '), emailLink);
+    };
+
+    const buildWhatsAppMessage = (appointment) => isEnglish
+        ? `Hello, I want to schedule an appointment from the website. Name: ${appointment.name}. Email: ${appointment.email}. Phone: ${appointment.phone}. Suggested date: ${appointment.appointmentDate || 'to coordinate'}. Preferred time: ${appointment.appointmentTime || 'to coordinate'}. Location: ${appointment.clinic || 'to coordinate'}. Reason: ${appointment.reason}`
+        : `Hola, quiero agendar una cita desde la página web. Nombre: ${appointment.name}. Correo: ${appointment.email}. Teléfono: ${appointment.phone}. Fecha sugerida: ${appointment.appointmentDate || 'por coordinar'}. Horario: ${appointment.appointmentTime || 'por coordinar'}. Consultorio: ${appointment.clinic || 'por coordinar'}. Motivo: ${appointment.reason}`;
+
+    const getWhatsAppNumber = (clinic) => {
+        const normalizedClinic = clinic.toLowerCase();
+        if (normalizedClinic.includes('sinad')) return '18095428898';
+        if (normalizedClinic.includes('medkids')) return '18095691072';
+        if (normalizedClinic.includes('insight')) return '18492621997';
+        return '18094592222';
+    };
+
+    const redirectToWhatsApp = (appointment, number) => {
+        const whatsappUrl = `https://wa.me/${number || getWhatsAppNumber(appointment.clinic)}?text=${encodeURIComponent(buildWhatsAppMessage(appointment))}`;
+        window.location.href = whatsappUrl;
     };
 
     form.addEventListener('submit', async (event) => {
@@ -86,10 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 : `Solicitud recibida. ${notifications ? `La doctora fue notificada por ${notifications}.` : 'La doctora confirmará tu horario pronto.'}`;
             setStatus(sentMessage, 'is-success');
             form.reset();
-
-            if (result.whatsappFallback) {
-                addFallbackLinks(appointment, result.whatsappNumber);
-            }
+            redirectToWhatsApp(appointment, result.whatsappNumber);
         } catch (error) {
             const message = error instanceof TypeError
                 ? (isEnglish ? 'The appointment server is unavailable. Use one of the direct contact options below.' : 'El servidor de citas no está disponible. Usa una de las opciones de contacto directo.')
