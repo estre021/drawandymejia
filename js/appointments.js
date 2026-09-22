@@ -14,12 +14,12 @@ document.addEventListener('DOMContentLoaded', () => {
         status.hidden = false;
     };
 
-    const addFallbackLinks = (appointment) => {
+    const addFallbackLinks = (appointment, whatsappNumber = '18094592222') => {
         const message = isEnglish
             ? `Hello, I want to schedule an appointment from the website. Name: ${appointment.name}. Email: ${appointment.email}. Phone: ${appointment.phone}. Suggested date: ${appointment.appointmentDate || 'to coordinate'}. Reason: ${appointment.reason}`
             : `Hola, quiero agendar una cita desde la página web. Nombre: ${appointment.name}. Correo: ${appointment.email}. Teléfono: ${appointment.phone}. Fecha sugerida: ${appointment.appointmentDate || 'por coordinar'}. Motivo: ${appointment.reason}`;
         const whatsappLink = document.createElement('a');
-        whatsappLink.href = `https://wa.me/18094592222?text=${encodeURIComponent(message)}`;
+        whatsappLink.href = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
         whatsappLink.target = '_blank';
         whatsappLink.rel = 'noopener';
         whatsappLink.className = 'appointment-status-action';
@@ -80,14 +80,21 @@ document.addEventListener('DOMContentLoaded', () => {
             form.reset();
 
             if (result.whatsappFallback) {
-                addFallbackLinks(appointment);
+                addFallbackLinks(appointment, result.whatsappNumber);
             }
         } catch (error) {
             const message = error instanceof TypeError
                 ? (isEnglish ? 'The appointment server is unavailable. Use one of the direct contact options below.' : 'El servidor de citas no está disponible. Usa una de las opciones de contacto directo.')
                 : (isEnglish ? 'The request could not be processed. Use one of the direct contact options below.' : 'No pudimos procesar la solicitud. Usa una de las opciones de contacto directo.');
             setStatus(message, 'is-error');
-            addFallbackLinks(appointment);
+            const fallbackNumber = value('consultorio').toLowerCase().includes('sinad')
+                ? '18095428898'
+                : value('consultorio').toLowerCase().includes('medkids')
+                    ? '18095691072'
+                    : value('consultorio').toLowerCase().includes('insight')
+                        ? '18492621997'
+                        : '18094592222';
+            addFallbackLinks(appointment, fallbackNumber);
         } finally {
             submitButton.disabled = false;
             submitButton.classList.remove('is-loading');

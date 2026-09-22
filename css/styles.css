@@ -3829,6 +3829,22 @@ video {
     text-align: center;
 }
 
+.hero:not(#inicio):not(.page-header-servicios) > .container {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    width: 100%;
+    max-width: none;
+    display: grid;
+    place-items: center;
+}
+
+.hero:not(#inicio):not(.page-header-servicios) > .container > .hero-content {
+    width: min(100%, 800px);
+    margin: 0 auto;
+    text-align: center;
+}
+
 /* CTA Group layouts */
 .about-cta-group, .banner-cta-group {
     display: flex;

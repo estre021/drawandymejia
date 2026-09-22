@@ -9,6 +9,11 @@ const app = express();
 const port = Number(process.env.PORT || 8000);
 const doctorEmail = process.env.DOCTOR_EMAIL || 'drawandymejiard@gmail.com';
 const doctorWhatsApp = (process.env.DOCTOR_WHATSAPP || '18094592222').replace(/\D/g, '');
+const clinicWhatsApp = {
+  sinad: (process.env.SINAD_WHATSAPP || '18095428898').replace(/\D/g, ''),
+  medkids: (process.env.MEDKIDS_WHATSAPP || '18095691072').replace(/\D/g, ''),
+  insight: (process.env.INSIGHT_WHATSAPP || '18492621997').replace(/\D/g, '')
+};
 
 app.use(express.json({ limit: '32kb' }));
 app.use(express.static(__dirname));
@@ -39,6 +44,14 @@ function validAppointment(data) {
   return data.name.length >= 2 &&
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email) &&
     data.phone.length >= 7 && data.reason.length >= 3;
+}
+
+function getWhatsAppRecipient(clinic) {
+  const normalizedClinic = clinic.toLowerCase();
+  if (normalizedClinic.includes('sinad')) return clinicWhatsApp.sinad;
+  if (normalizedClinic.includes('medkids')) return clinicWhatsApp.medkids;
+  if (normalizedClinic.includes('insight')) return clinicWhatsApp.insight;
+  return doctorWhatsApp;
 }
 
 function emailTransporter() {
@@ -82,7 +95,8 @@ async function notifyByEmail(data) {
 async function notifyByWhatsApp(data) {
   const token = process.env.WHATSAPP_TOKEN;
   const phoneNumberId = process.env.WHATSAPP_PHONE_NUMBER_ID;
-  if (!token || !phoneNumberId || !doctorWhatsApp) return { sent: false, reason: 'whatsapp_not_configured' };
+  const recipient = getWhatsAppRecipient(data.clinic);
+  if (!token || !phoneNumberId || !recipient) return { sent: false, reason: 'whatsapp_not_configured' };
 
   // Mensaje breve: el motivo clínico completo se mantiene en el correo.
   const message = [
@@ -104,7 +118,7 @@ async function notifyByWhatsApp(data) {
     },
     body: JSON.stringify({
       messaging_product: 'whatsapp',
-      to: doctorWhatsApp,
+      to: recipient,
       type: 'text',
       text: { body: message, preview_url: false }
     })
@@ -139,7 +153,7 @@ app.post('/api/appointments', async (req, res) => {
       emailSent,
       whatsappSent,
       whatsappFallback: !whatsappSent,
-      doctorWhatsApp
+      whatsappNumber: getWhatsAppRecipient(data.clinic)
     });
   } catch (error) {
     console.error(error);

@@ -2,6 +2,11 @@ import nodemailer from 'nodemailer';
 
 const doctorEmail = process.env.DOCTOR_EMAIL;
 const doctorWhatsApp = (process.env.DOCTOR_WHATSAPP || '').replace(/\D/g, '');
+const clinicWhatsApp = {
+  sinad: (process.env.SINAD_WHATSAPP || '18095428898').replace(/\D/g, ''),
+  medkids: (process.env.MEDKIDS_WHATSAPP || '18095691072').replace(/\D/g, ''),
+  insight: (process.env.INSIGHT_WHATSAPP || '18492621997').replace(/\D/g, '')
+};
 const rateLimit = new Map();
 
 function clean(value, max = 250) {
@@ -25,6 +30,14 @@ function validAppointment(data) {
   return data.name.length >= 2 &&
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email) &&
     data.phone.length >= 7 && data.reason.length >= 3;
+}
+
+function getWhatsAppRecipient(clinic) {
+  const normalizedClinic = clinic.toLowerCase();
+  if (normalizedClinic.includes('sinad')) return clinicWhatsApp.sinad;
+  if (normalizedClinic.includes('medkids')) return clinicWhatsApp.medkids;
+  if (normalizedClinic.includes('insight')) return clinicWhatsApp.insight;
+  return doctorWhatsApp;
 }
 
 function clientKey(req) {
@@ -79,7 +92,8 @@ async function notifyByEmail(data) {
 async function notifyByWhatsApp(data) {
   const token = process.env.WHATSAPP_TOKEN;
   const phoneNumberId = process.env.WHATSAPP_PHONE_NUMBER_ID;
-  if (!token || !phoneNumberId || !doctorWhatsApp) return false;
+  const recipient = getWhatsAppRecipient(data.clinic);
+  if (!token || !phoneNumberId || !recipient) return false;
 
   const response = await fetch(`https://graph.facebook.com/${process.env.WHATSAPP_API_VERSION || 'v22.0'}/${phoneNumberId}/messages`, {
     method: 'POST',
@@ -89,7 +103,7 @@ async function notifyByWhatsApp(data) {
     },
     body: JSON.stringify({
       messaging_product: 'whatsapp',
-      to: doctorWhatsApp,
+      to: recipient,
       type: 'text',
       text: {
         body: [
@@ -131,6 +145,7 @@ export default async function handler(req, res) {
   ]);
   const emailSent = emailResult.status === 'fulfilled' && emailResult.value === true;
   const whatsappSent = whatsappResult.status === 'fulfilled' && whatsappResult.value === true;
+  const whatsappNumber = getWhatsAppRecipient(data.clinic);
 
   if (emailResult.status === 'rejected') console.error('Appointment email notification failed.');
   if (whatsappResult.status === 'rejected') console.error('Appointment WhatsApp notification failed.');
@@ -139,6 +154,7 @@ export default async function handler(req, res) {
     ok: true,
     emailSent,
     whatsappSent,
-    whatsappFallback: !whatsappSent
+    whatsappFallback: !whatsappSent,
+    whatsappNumber
   });
 }
