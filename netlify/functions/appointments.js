@@ -4,7 +4,16 @@ export default async function netlifyAppointments(event) {
   let responseStatus = 200;
   const responseHeaders = {};
   let responseBody = '{}';
-  const requestBody = event.body ? JSON.parse(event.body) : {};
+  let requestBody = {};
+  try {
+    requestBody = event.body ? JSON.parse(event.body) : {};
+  } catch {
+    return {
+      statusCode: 400,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ok: false, error: 'Invalid request body.' })
+    };
+  }
 
   const request = {
     method: event.httpMethod,
@@ -26,11 +35,21 @@ export default async function netlifyAppointments(event) {
     }
   };
 
-  await handler(request, response);
+  try {
+    await handler(request, response);
+  } catch (error) {
+    console.error('Appointment function failed:', error?.message || error);
+    return {
+      statusCode: 500,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ok: false, error: 'No pudimos procesar la solicitud en este momento.' })
+    };
+  }
 
   return {
     statusCode: responseStatus,
     headers: { 'Content-Type': 'application/json', ...responseHeaders },
-    body: responseBody
+    body: responseBody,
+    isBase64Encoded: false
   };
 }

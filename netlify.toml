@@ -6,6 +6,7 @@
   from = "/api/appointments"
   to = "/.netlify/functions/appointments"
   status = 200
+  force = true
 
 [[redirects]]
   from = "/"

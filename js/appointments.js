@@ -63,7 +63,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(appointment)
             });
-            const result = await response.json();
+            const result = await response.json().catch(() => ({
+                ok: false,
+                error: `Server response error (${response.status}).`
+            }));
 
             if (!response.ok || !result.ok) {
                 throw new Error(result.error || 'Request failed');
