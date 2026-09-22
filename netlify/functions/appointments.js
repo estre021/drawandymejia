@@ -6,7 +6,10 @@ export default async function netlifyAppointments(event) {
   let responseBody = '{}';
   let requestBody = {};
   try {
-    requestBody = event.body ? JSON.parse(event.body) : {};
+    const rawBody = event.isBase64Encoded
+      ? Buffer.from(event.body || '', 'base64').toString('utf8')
+      : event.body;
+    requestBody = rawBody ? JSON.parse(rawBody) : {};
   } catch {
     return {
       statusCode: 400,

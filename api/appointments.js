@@ -65,6 +65,14 @@ function transporter() {
   });
 }
 
+function emailIsConfigured() {
+  return Boolean(process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASSWORD && doctorEmail);
+}
+
+function whatsappIsConfigured(recipient) {
+  return Boolean(process.env.WHATSAPP_TOKEN && process.env.WHATSAPP_PHONE_NUMBER_ID && recipient);
+}
+
 async function notifyByEmail(data) {
   const mailer = transporter();
   if (!mailer || !doctorEmail) return false;
@@ -146,15 +154,19 @@ export default async function handler(req, res) {
   const emailSent = emailResult.status === 'fulfilled' && emailResult.value === true;
   const whatsappSent = whatsappResult.status === 'fulfilled' && whatsappResult.value === true;
   const whatsappNumber = getWhatsAppRecipient(data.clinic);
+  const emailConfigured = emailIsConfigured();
+  const whatsappConfigured = whatsappIsConfigured(whatsappNumber);
 
   if (emailResult.status === 'rejected') console.error('Appointment email notification failed.');
   if (whatsappResult.status === 'rejected') console.error('Appointment WhatsApp notification failed.');
 
-  return res.status(emailSent || whatsappSent ? 201 : 202).json({
-    ok: true,
+  return res.status(emailSent || whatsappSent ? 201 : 503).json({
+    ok: emailSent || whatsappSent,
     emailSent,
     whatsappSent,
     whatsappFallback: !whatsappSent,
-    whatsappNumber
+    whatsappNumber,
+    emailConfigured,
+    whatsappConfigured
   });
 }

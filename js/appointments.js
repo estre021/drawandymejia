@@ -69,7 +69,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }));
 
             if (!response.ok || !result.ok) {
-                throw new Error(result.error || 'Request failed');
+                const configurationMissing = result.emailConfigured === false && result.whatsappConfigured === false;
+                throw new Error(configurationMissing
+                    ? (isEnglish ? 'Notifications are not configured on the hosting service.' : 'Las notificaciones no están configuradas en el hosting.')
+                    : (result.error || 'Request failed'));
             }
 
             const notifications = [
@@ -88,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             const message = error instanceof TypeError
                 ? (isEnglish ? 'The appointment server is unavailable. Use one of the direct contact options below.' : 'El servidor de citas no está disponible. Usa una de las opciones de contacto directo.')
-                : (isEnglish ? 'The request could not be processed. Use one of the direct contact options below.' : 'No pudimos procesar la solicitud. Usa una de las opciones de contacto directo.');
+                : error.message || (isEnglish ? 'The request could not be processed. Use one of the direct contact options below.' : 'No pudimos procesar la solicitud. Usa una de las opciones de contacto directo.');
             setStatus(message, 'is-error');
             const fallbackNumber = value('consultorio').toLowerCase().includes('sinad')
                 ? '18095428898'
