@@ -69,6 +69,15 @@ function emailIsConfigured() {
   return Boolean(process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASSWORD && doctorEmail);
 }
 
+function missingConfiguration() {
+  return [
+    ['DOCTOR_EMAIL', doctorEmail],
+    ['SMTP_HOST', process.env.SMTP_HOST],
+    ['SMTP_USER', process.env.SMTP_USER],
+    ['SMTP_PASSWORD', process.env.SMTP_PASSWORD]
+  ].filter(([, value]) => !value).map(([name]) => name);
+}
+
 function whatsappIsConfigured(recipient) {
   return Boolean(process.env.WHATSAPP_TOKEN && process.env.WHATSAPP_PHONE_NUMBER_ID && recipient);
 }
@@ -167,6 +176,7 @@ export default async function handler(req, res) {
     whatsappFallback: !whatsappSent,
     whatsappNumber,
     emailConfigured,
-    whatsappConfigured
+    whatsappConfigured,
+    missingConfiguration: emailSent || whatsappSent ? [] : missingConfiguration()
   });
 }

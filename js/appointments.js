@@ -71,7 +71,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!response.ok || !result.ok) {
                 const configurationMissing = result.emailConfigured === false && result.whatsappConfigured === false;
                 throw new Error(configurationMissing
-                    ? (isEnglish ? 'Notifications are not configured on the hosting service.' : 'Las notificaciones no están configuradas en el hosting.')
+                    ? (isEnglish
+                        ? `Notifications are not configured. Missing: ${(result.missingConfiguration || []).join(', ') || 'hosting variables'}.`
+                        : `Faltan variables en Netlify: ${(result.missingConfiguration || []).join(', ') || 'configuración de notificaciones'}.`)
                     : (result.error || 'Request failed'));
             }
 
