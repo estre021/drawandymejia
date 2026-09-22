@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     : value('consultorio').toLowerCase().includes('insight')
                         ? '18492621997'
                         : '18094592222';
-            addFallbackLinks(appointment, fallbackNumber);
+            window.setTimeout(() => redirectToWhatsApp(appointment, fallbackNumber), 250);
         } finally {
             submitButton.disabled = false;
             submitButton.classList.remove('is-loading');
